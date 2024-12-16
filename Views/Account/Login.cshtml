@@ -1,0 +1,55 @@
+﻿@model iranAttractions.ViewModels.LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>و ثبت نام</title>
+    <link href="../CSS/login-register.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+
+    <div class="login-reg-panel">
+
+
+        <div class="register-info-box">
+            <h2>حساب کاربری ندارید؟</h2>
+            <div class="btn">
+                <a id="label-register" asp-action="Register">ثبت نام</a>
+                <input type="radio" name="active-log-panel" id="log-login-show">
+            </div>
+        </div>
+
+        <div class="white-panel">
+
+            <div class="login-show show-log-panel">
+                <h2>ورود</h2>
+                <form asp-action="Login" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <span asp-validation-for="phonenumber" class="text-danger"></span>
+                    <input asp-for="phonenumber" type="text" placeholder="شماره تماس">
+
+                    <span asp-validation-for="password" class="text-danger"></span>
+                    <input asp-for="password" type="password" placeholder="رمز عبور">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+                        </label>
+                    </div>
+                    <div class="btn"><button type="submit">Login</button></div>
+                </form>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+</body>
+</html>

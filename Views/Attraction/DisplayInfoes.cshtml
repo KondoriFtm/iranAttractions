@@ -1,0 +1,88 @@
+﻿@using static Microsoft.EntityFrameworkCore.DbLoggerCategory
+@model iranAttractions.ViewModels.SightseeingViewModel
+@section Styles {
+    <link rel="stylesheet" href="~/css/distination.css" />
+}
+
+<!-- بخش اسلایدر -->
+<div class="slider">
+    <div class="slide active">
+        <img src=@Model.sightseeing.parts[0].PicUrl alt="Image 1">
+        <div class="caption">
+            <h1>@Model.sightseeing.parts[0].Title</h1>
+            <p>@Model.sightseeing.parts[0].Description</p>
+        </div>
+    </div>
+    @for(int i =1;i<Model.sightseeing.parts.Count;i++)
+    {
+        <div class="slide ">
+            <img src=@Model.sightseeing.parts[i].PicUrl alt="Image 1">
+            <div class="caption">
+                <h1>@Model.sightseeing.parts[i].Title</h1>
+                <p>@Model.sightseeing.parts[i].Description</p>
+            </div>
+        </div>
+    }
+
+    <!-- دکمه‌های ناوبری اسلایدر -->
+    <div class="navigation">
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </div>
+</div>
+
+
+<form asp-action="AddPicture" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="PictureModel.SightseeingId" />
+    <div class="form-group">
+        <label asp-for="PictureModel.Picture"></label>
+        <input asp-for="PictureModel.Picture" type="file" class="form-control" />
+        <span asp-validation-for="PictureModel.Picture" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Book</button>
+</form>
+
+<div class="main_container">
+    <!-- بخش نظرات -->
+    <div class="comments-section">
+        @foreach(var item in Model.Comments)
+        {
+            if(item.State == 1)
+            {
+                <div class="comment">
+                    <div class="comment-header">
+                        <h3>@item.Users.UserName - <span>@item.Date</span></h3>
+                    </div>
+                    <p>@item.Description</p>
+                </div>
+            }
+
+        }
+        <!-- ادامه نظرات -->
+    </div>
+
+    <!-- فرم ارسال نظر -->
+
+
+
+    
+        
+        <div class="comment-form">
+        <h3>ارسال نظر</h3>
+        <form asp-action="AddComment" asp-controller="Attraction" method="post">
+            <input type="hidden" name="SightseeingId" value="@Model.sightseeing.Id" />
+            <div>
+                <label for="Description">پیام</label>
+                <textarea id="Description" name="Description" rows="4"></textarea>
+            </div>
+         
+            <p>حساب کاربری ندارید؟<a href="#">ثبت نام کنید!</a></p>
+            <button type="submit">ارسال نظر</button>
+        </form>
+        </div>
+
+
+
+
+</div>
+<!-- اسکریپت اسلایدر -->

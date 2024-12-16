@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - iranAttractions</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    @RenderSection("Styles", required: false) <!-- Page-specific CSS -->
+
+
+
+
+
+</head>
+<body>
+    
+        <nav class="navbar" >
+            <ul>
+                <li><img src="~/img/33.jpg" alt="Logo" class="logo"></li>
+                <li><a href="contact.html">تماس با ما</a></li>
+                <li><a href="blog.html">بلاگ</a></li>
+                <li><a href="gallery.html">گالری</a></li>
+                <li><a href="home.html">خانه</a></li>
+                <li><a href="login.html">ورود/ثبت نام</a></li>
+            </ul>
+        </nav>
+
+        @RenderSection("header", required: false)
+    <
+    
+        
+            @RenderBody()
+        
+    
+
+    <footer class="border-top footer text-muted">
+        
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/distination.js"></script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

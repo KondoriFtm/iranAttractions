@@ -1,0 +1,20 @@
+﻿@model iranAttractions.Models.Comment
+
+<form method="post" asp-action="AddComment" asp-controller="Attraction">
+    <input type="hidden" asp-for="Id" value="@Model.Id" /> <!-- Pass SightseeingId to the comment -->
+    <div>
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" rows="4"></textarea>
+    </div>
+
+    <div>
+        <label asp-for="Users.Phonenumber"></label>
+        <input asp-for="Users.Phonenumber" , type="text">
+
+    </div>
+
+    <p>حساب کاربری ندارید؟<a href="#">ثبت نام کنید!</a></p>
+
+    <button type="submit">ارسال نظر</button>
+</form>
+

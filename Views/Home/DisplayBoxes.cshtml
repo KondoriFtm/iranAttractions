@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "DisplayBoxes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    <header class="site-header">
+        <div class="header-content">
+            <h1 class="site-title">SAFAّRO&nbsp;</h1>
+            <p class="site-tagline"> "هر مقصد یک داستان ، هر سفر یک خاطره"</p>
+            <input type="text" class="search-box" placeholder="جستجو">
+        </div>
+    </header>
+}
+
+
+<body>
+    
+    <article class="site-content">
+
+        <!-- دیو استان‌ها -->
+        <div class="divprovince">
+            <h2 class="province">لیست استان‌ها</h2>
+            <div class="gallery-container1">
+                <a class="pic-link" href="shiraz.html">
+                    <img class="gallery" src="~/img/5.jpg" alt="takhte-jamshid">
+                    <button class="pic-button">شیراز</button>
+
+                </a>
+                <p class="pic-text">36جاذبه</p>
+            </div>
+
+            <div class="gallery-container1">
+                <a class="pic-link" href="isfahan.html">
+                    <img class="gallery" src="~/img/16.jpg" alt="isfahan">
+                    <button class="pic-button">اصفهان</button>
+
+                </a>
+                <p class="pic-text">70جاذبه</p>
+            </div>
+
+            <div class="gallery-container1">
+                <a class="pic-link" href="shiraz.html">
+                    <img class="gallery" src="~/img/88.jpg" alt="shiraz">
+                    <button class="pic-button">تهران</button>
+
+                </a>
+                <p class="pic-text">20جاذبه</p>
+            </div>
+        </div>
+
+        <!-- دیو جاذبه‌ها -->
+        <div class="divattraction">
+            <h2 class="province">لیست جاذبه‌ها</h2>
+            <div class="gallery-container2">
+                <a class="pic-link" href="shiraz.html">
+                    <img class="gallery" src="~/img/6.jpg" alt="takhte-jamshid">
+                    <button class="pic-button">شیراز</button>
+
+                </a>
+                <p class="pic-text">سعدیه</p>
+            </div>
+
+            <div class="gallery-container2">
+                <a class="pic-link" href="isfahan.html">
+                    <img class="gallery" src="~/img/19.jpg" alt="isfahan">
+                    <button class="pic-button">اصفهان</button>
+
+                </a>
+                <p class="pic-text">نقش جهان</p>
+            </div>
+
+            <div class="gallery-container2">
+                <a class="pic-link" href="isfahan.html">
+                    <img class="gallery" src="~/img/dew.jpg" alt="takhte-jamshid">
+                    <button class="pic-button">تهران</button>
+
+                </a>
+                <p class="pic-text">کاخ مسعودیه</p>
+            </div>
+        </div>
+
+    </article>
+
+</body>
