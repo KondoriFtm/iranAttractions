@@ -12,5 +12,9 @@ namespace iranAttractions.Models
         public string Description { get; set; }
 
         public List<Sightseeing> sightseeings { get; set; }
+        public List<Hotel> hotels { get; set; }
+
+        public int AttractionCount { get { return sightseeings != null ? sightseeings.Count : 0; } }
+
     }
 }

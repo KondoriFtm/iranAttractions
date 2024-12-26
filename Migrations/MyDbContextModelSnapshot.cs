@@ -68,6 +68,10 @@ namespace iranAttractions.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("picurl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SightseeingId");
@@ -75,6 +79,38 @@ namespace iranAttractions.Migrations
                     b.HasIndex("UserPhonenumber");
 
                     b.ToTable("Comment");
+                });
+
+            modelBuilder.Entity("iranAttractions.Models.Hotel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("cityId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("lat")
+                        .HasColumnType("float");
+
+                    b.Property<double>("lon")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("cityId");
+
+                    b.ToTable("Hotels");
                 });
 
             modelBuilder.Entity("iranAttractions.Models.Parts", b =>
@@ -124,7 +160,7 @@ namespace iranAttractions.Migrations
 
                     b.Property<string>("UserPhonenumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("dateImported")
                         .HasColumnType("datetime2");
@@ -132,7 +168,14 @@ namespace iranAttractions.Migrations
                     b.Property<int>("likecounts")
                         .HasColumnType("int");
 
+                    b.Property<int>("state")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SightseeingId");
+
+                    b.HasIndex("UserPhonenumber");
 
                     b.ToTable("Pictures");
                 });
@@ -155,6 +198,12 @@ namespace iranAttractions.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("lat")
+                        .HasColumnType("float");
+
+                    b.Property<double>("lon")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -204,6 +253,17 @@ namespace iranAttractions.Migrations
                     b.Navigation("Users");
                 });
 
+            modelBuilder.Entity("iranAttractions.Models.Hotel", b =>
+                {
+                    b.HasOne("iranAttractions.Models.City", "City")
+                        .WithMany("hotels")
+                        .HasForeignKey("cityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
             modelBuilder.Entity("iranAttractions.Models.Parts", b =>
                 {
                     b.HasOne("iranAttractions.Models.Sightseeing", "Sightseeings")
@@ -213,6 +273,25 @@ namespace iranAttractions.Migrations
                         .IsRequired();
 
                     b.Navigation("Sightseeings");
+                });
+
+            modelBuilder.Entity("iranAttractions.Models.Picture", b =>
+                {
+                    b.HasOne("iranAttractions.Models.Sightseeing", "sightseeing")
+                        .WithMany()
+                        .HasForeignKey("SightseeingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("iranAttractions.Models.User", "user")
+                        .WithMany()
+                        .HasForeignKey("UserPhonenumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("sightseeing");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("iranAttractions.Models.Sightseeing", b =>
@@ -228,6 +307,8 @@ namespace iranAttractions.Migrations
 
             modelBuilder.Entity("iranAttractions.Models.City", b =>
                 {
+                    b.Navigation("hotels");
+
                     b.Navigation("sightseeings");
                 });
 

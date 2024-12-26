@@ -9,9 +9,8 @@ namespace iranAttractions.ViewModels
 
 
 
-        [EmailAddress(ErrorMessage = "لطفا یک ایمیل معتبر وارد کنید")]
         [Required(ErrorMessage = "لطفا ایمیل خود وارد کنید  ")]
-        [Display(Name = "ایمیل ")]
+        [Display(Name = "شماره تماس ")]
         public string phonenumber { get; set; }
 
 

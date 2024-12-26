@@ -35,7 +35,7 @@ namespace iranAttractions.Controllers
             if (user == null) //means no usr with such a UserID s available
             {
 
-                ModelState.AddModelError("Email", "شما قبلا ثبت نام نکرده اید");
+                ModelState.AddModelError("phonenumber", "شما قبلا ثبت نام نکرده اید");
                 return View(model);
 
             }

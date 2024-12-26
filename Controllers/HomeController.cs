@@ -1,6 +1,8 @@
 ﻿using iranAttractions.data;
 using iranAttractions.Models;
+using iranAttractions.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace iranAttractions.Controllers
@@ -15,7 +17,15 @@ namespace iranAttractions.Controllers
             _logger = logger;
             _db = myDb;
         }
-
+        public IActionResult Index()
+        {
+            var mainviewModel = new MainViewModel
+            {
+                Cities = _db .City.ToList(),
+                sightseeings = _db.sightseeing.ToList()
+            };
+            return View(mainviewModel);
+        }
         public IActionResult DisplayBoxes()
         {
             var cms = _db.Comment.ToList();

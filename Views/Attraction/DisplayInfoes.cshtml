@@ -1,88 +1,194 @@
-﻿@using static Microsoft.EntityFrameworkCore.DbLoggerCategory
+﻿
+ @using static Microsoft.EntityFrameworkCore.DbLoggerCategory
 @model iranAttractions.ViewModels.SightseeingViewModel
 @section Styles {
     <link rel="stylesheet" href="~/css/distination.css" />
 }
 
-<!-- بخش اسلایدر -->
-<div class="slider">
-    <div class="slide active">
-        <img src=@Model.sightseeing.parts[0].PicUrl alt="Image 1">
-        <div class="caption">
-            <h1>@Model.sightseeing.parts[0].Title</h1>
-            <p>@Model.sightseeing.parts[0].Description</p>
+
+<div class="main-slider">
+    <div class="main-slide active">
+        <img src="~/img/naghshejahan.jfif" alt="Image 1">
+        <div class="main-caption">
+            <h1>میدان نقش جهان</h1>
+            <p>میدان نقش جهان که به صورت رسمی با عنوان میدان امام شناخته می‌شود، میدان مرکزی شهر اصفهان است و بخشی از یک مجموعه تاریخی به شمار می‌رود. آنچه که این میدان را از سایر همتایانش متمایز می‌کند شکل مستطیلی آن است که با ظاهر دایره‌ای یا بیضی شکلِ بسیاری از میادین معمول و رایج، تفاوت دارد. این میدان مستطیلی، ۵۶۰ متر و ۱۶۰ متر عرض دارد و یا به عبارت دیگر طول آن با 430 قدم و عرض آن با 160 قدم طی می‌شود.</p>
         </div>
     </div>
-    @for(int i =1;i<Model.sightseeing.parts.Count;i++)
-    {
-        <div class="slide ">
-            <img src=@Model.sightseeing.parts[i].PicUrl alt="Image 1">
-            <div class="caption">
-                <h1>@Model.sightseeing.parts[i].Title</h1>
-                <p>@Model.sightseeing.parts[i].Description</p>
-            </div>
+    <div class="main-slide">
+        <img src="~/img/meidannaghshejahan.jpg" alt="Image 2">
+        <div class="main-caption">
+            <h1>دیدنی های میدان نقش جهان</h1>
+            <p>این میدان در میان خود، حوض بزرگی دارد که زیبایی رقص فواره هایش زبانزد خاص و عام است. گذرگاه های متعدد به شما اجازه می دهند که به راحتی در جای جای میدان حرکت کنید و از تماشای زیبایی های آن لذت ببرید. در دو ضلع این میدان بناهای مذهبی و مساجد قرار دارند و در ضلعی دیگر یک کاخ تماشایی مشاهده می شود.</p>
         </div>
-    }
-
-    <!-- دکمه‌های ناوبری اسلایدر -->
+    </div>
+    <div class="main-slide">
+        <img src="~/img/naghshejahan.jpg" alt="Image 3">
+        <div class="main-caption">
+            <h1>مسجد شیخ لطف الله</h1>
+            <p>در گوشه ای از این میدان تاریخی، گنبد زیبای یک مسجد، توجه هر رهگذری را به خود جلب می کند چرا که بر خلاف سایر مساجد که مناره های شان به سوی آبی آسمان رفته اند، بر فراز آن هیچ مناره ای مشاهده نمی شود. مسجد شیخ لطف الله یکی از مساجد خاص ایران است که در دوران صفوی ساخته شده و امروزه به عنوان یکی از دیدنی های مجموعه نقش جهان و در میان مساجد تاریخی اصفهان طرفداران بسیاری دارد.</p>
+        </div>
+    </div>
+    <div class="main-slide">
+        <img src="~/img/alighapo.jpg" alt="Image 4">
+        <div class="main-caption">
+            <h1>بازار قیصریه</h1>
+            <p>بازار اصفهان یکی از بزرگترین و زیباترین بازار های ایران است و به دلیل حضور در میدان نقش جهان، یکی از ممتازترین بازارهای ایران از نظر موقعیت گردشگری به شمار می رود.بخشی از این بازار با عنوان بازار قیصریه شناخته می شود که ورودی آن در میدان نقش جهان، توسط سردری زیبا مشخص شده است. راسته های اصلی و فرعی زیادی در این بازار وجود دارد که از میان آنها می توان به سماور سازها، مَخلص، مقصودبیک، هارونیه، نیم آورد گلشن، شَله و ... اشاره کرد.</p>
+        </div>
+    </div>
     <div class="navigation">
         <button class="prev" onclick="prevSlide()">&#10094;</button>
         <button class="next" onclick="nextSlide()">&#10095;</button>
     </div>
 </div>
-
-
-<form asp-action="AddPicture" method="post" enctype="multipart/form-data">
-    <input type="hidden" asp-for="PictureModel.SightseeingId" />
-    <div class="form-group">
-        <label asp-for="PictureModel.Picture"></label>
-        <input asp-for="PictureModel.Picture" type="file" class="form-control" />
-        <span asp-validation-for="PictureModel.Picture" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Add Book</button>
-</form>
-
-<div class="main_container">
-    <!-- بخش نظرات -->
-    <div class="comments-section">
-        @foreach(var item in Model.Comments)
-        {
-            if(item.State == 1)
-            {
-                <div class="comment">
-                    <div class="comment-header">
-                        <h3>@item.Users.UserName - <span>@item.Date</span></h3>
-                    </div>
-                    <p>@item.Description</p>
-                </div>
-            }
-
-        }
-        <!-- ادامه نظرات -->
-    </div>
-
-    <!-- فرم ارسال نظر -->
-
-
-
-    
-        
-        <div class="comment-form">
-        <h3>ارسال نظر</h3>
-        <form asp-action="AddComment" asp-controller="Attraction" method="post">
-            <input type="hidden" name="SightseeingId" value="@Model.sightseeing.Id" />
-            <div>
-                <label for="Description">پیام</label>
-                <textarea id="Description" name="Description" rows="4"></textarea>
-            </div>
-         
-            <p>حساب کاربری ندارید؟<a href="#">ثبت نام کنید!</a></p>
-            <button type="submit">ارسال نظر</button>
-        </form>
+<div class="main">
+    <div class="main_container">
+        <div class="navbar2">
+            <a href="#restaurants">رستوران‌ها</a>
+            <a href="#hotels">هتل‌ها</a>
+            <a href="#gallery">گالری</a>
+            <a href="#reviews">نظرات</a>
         </div>
+        <section id="hotels">
+            <h2>هتل‌ها</h2>
+            @for(int i=0; i<4; i++)
+            {
+                <div class="responsive">
+                    <div class="gallery">
+                        <a target="_blank" href="img_5terre.jpg">
+                            @{
+                                string src = Url.Content("~/img/Hotels/" + Model.Hot_Dis[i].Hotel.Id.ToString() + ".jpg");
+                            }
+
+                            <img src="@src" alt="Cinque Terre" width="600" height="400">
+                        </a>
+                        <div class="desc">@Model.Hot_Dis[i].distance ,  @Model.Hot_Dis[i].Hotel.Name</div>
+                    </div>
+                </div>
+                
+            }
+            
+           
+            <div class="clearfix"></div>
+        </section>
+       
+        <section id="gallery">
+            <h2>گالری</h2>
+            <!--<div>
+              <p>تصویری برای نمایش وجود ندارد!</p>
+            </div>-->
+           
+            <div class="gallery-container">
+                @if (Model.Pictures != null)
+                {
+                    <div class="gallery-container">
+                        @for (var i = 0; i < Model.Pictures.Count; i++)
+                        {
+                            var pic = Model.Pictures[i];
+                            string src = "~/uploads/" + pic.FilePath;
+                            var imgUrl = Url.Content(src);
+                            string[] unitsMap = {"one","two","three","four","five" };
+                            string className = "box " + unitsMap[i]; // Create a unique class name for each box
+
+                            <div class="@className" style="--img:url('@imgUrl');" data-text="star lord">
+                                <div class="like-button"></div>
+                            </div>
+                        }
+                    </div>
+
+                }
 
 
+              </div>      
+               
+            <br><br>
+            <form asp-action="AddPicture" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="Id" value="@Model.sightseeing.Id" />
+                <div class="upload-section">
+                    <h3>آپلود عکس شما</h3>
+                    <label for="imageUpload">انتخاب فایل</label>
+                    <input name="Picture" type="file" id="imageUpload" >
+                    <div class="image-preview"></div>
+                    <button type="submit" id="uploadButton">آپلود</button>
+                </div>
+            </form>
+        </section>
+        <section id="reviews">
+            <h2>نظرات کاربران</h2>
+            <!--<div>
+              <p>تصویری برای نمایش وجود ندارد!</p>
+            </div>-->
+            <div class="comment-slider">
+                <div class="slider-comments">
+                    @{
+                        int comments_count = Model.Comments.Count;
+                        int l = 0;
+                        int label = comments_count / 3 + 1;
+                    }
+                    @for(int i=0; i<label;i++)
+                    {
+                        <div class="com-slide">
+                            <div class="comments">
+                                @for(int j=0;j<3;j++)
+                                {
+                                    @if(l<comments_count)
+                                    {
+                                        <div class="comment-box">
+                                            <span class="comment-name">@Model.Comments[l].Users.UserName</span>
+                                            <div class="comment-text">
+                                                @Model.Comments[l].Description;
+                                            </div>
+                                            <img class="comment-image" src=@Model.Comments[l].picurl alt="">
+                                            
+                                        </div>
+                                        l += 1;
+                                    }
+                                   
+                                    else
+                                    {
+                                        break;
+                                    }
 
+                                }   
+                            </div>
 
+                        </div>  
+                    }
+                   
+                
+                </div>
+                <button id="prevBtn">&#10094;</button>
+                <button id="nextBtn">&#10095;</button>
+            </div>
+            <section id="add-comment-section">
+              <h3>ارسال نظر</h3>
+                <form id="form_submition" asp-action="AddComment" asp-controller="Attraction" method="post">
+                    <input type="hidden" name="SightseeingId" value="@Model.sightseeing.Id" />
+                    <input  id="selected-image" type="hidden" name="picurl" />
+
+                    <div class="comment-form">
+                        <textarea id="comment-input" name="Description" placeholder="نظر خود را وارد کنید"></textarea>
+                        <button type="submit" id="submit-btn">ارسال</button>
+                    </div>                
+                </form>
+               
+              <div class="profile-selection">
+                <h4>انتخاب تصویر پروفایل</h4>
+                <div class="profile-images">
+                  <img src="~/img/profile.png" alt="Profile 1" class="profile-option" onclick="selectProfile(this)">
+                  <img src="~/img/profile1.png" alt="Profile 2" class="profile-option" onclick="selectProfile(this)">
+                  <img src="~/img/profile2.png" alt="Profile 3" class="profile-option" onclick="selectProfile(this)">
+                </div>
+                <div id="selected-profile">
+                  <span>تصویر انتخابی شما:</span>
+                  <img id="selected-profile-image" src="img/profile1.png" alt="Selected Profile">
+                </div>
+              </div>
+            </section>
+           
+        </section>
+    </div>
 </div>
-<!-- اسکریپت اسلایدر -->
+
+
+
+

@@ -12,8 +12,10 @@
         public int likecounts { get; set; }
 
         public int SightseeingId { get; set; }
-
+        public Sightseeing sightseeing { get; set; }
         public string UserPhonenumber { get; set; }
+        public User user { get; set; }
+        public int state {  get; set; }
 
 
     }

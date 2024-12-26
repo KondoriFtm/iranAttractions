@@ -1,23 +1,34 @@
-let currentSlide = 0;
-const slides = document.querySelectorAll(".slide");
+let mainIndex = 0;
+const mainSlides = document.querySelectorAll(".main-slide");
 
-function showSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.remove("active");
-    if (i === index) slide.classList.add("active");
-  });
+function showMainSlide(index) {
+    mainSlides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+    });
 }
-
 function nextSlide() {
-  currentSlide = (currentSlide + 1) % slides.length;
-  showSlide(currentSlide);
+    mainIndex = (mainIndex + 1) % mainSlides.length;
+    showMainSlide(mainIndex);
 }
 
 function prevSlide() {
-  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-  showSlide(currentSlide);
+    mainIndex = (mainIndex - 1 + mainSlides.length) % mainSlides.length;
+    showMainSlide(mainIndex);
 }
 
-setInterval(nextSlide,10000);
-// Show the first slide initially
-showSlide(currentSlide);
+function adjustSliderHeight() {
+    const mainSlider = document.querySelector(".main-slider");
+    let maxHeight = 0;
+    mainSlides.forEach(slide => {
+        const img = slide.querySelector("img");
+        maxHeight = Math.max(maxHeight, img.naturalHeight);
+    });
+    mainSlider.style.height = '${maxHeight}px';
+}
+window.addEventListener("load", () => {
+    adjustSliderHeight();
+    showMainSlide(mainIndex);
+});
+window.addEventListener("resize", adjustSliderHeight);
+
+setInterval(nextSlide, 10000);

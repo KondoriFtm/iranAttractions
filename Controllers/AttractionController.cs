@@ -1,5 +1,6 @@
 ﻿using iranAttractions.data;
 using iranAttractions.Models;
+using iranAttractions.Services;
 using iranAttractions.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,31 +13,37 @@ namespace iranAttractions.Controllers
     {
         private readonly MyDbContext _db;
         private readonly IWebHostEnvironment _hostingEnvironment;
-
         public AttractionController(MyDbContext context, IWebHostEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
             _db = context;
+
         }
 
         public IActionResult DisplayInfoes(int id)
         {
-            var sightseeing =  _db.sightseeing
+            var sightseeings =  _db.sightseeing
                                    .Include(s=>s.parts)
                                    .FirstOrDefault(s => s.Id == id);
-
-            var comments = _db.Comment.Where(c=>c.SightseeingId == id).Include(c=>c.Users).ToList();
-            var pictures = _db.Pictures.Where(p=>p.SightseeingId==id).ToList();
-
+            var hotels = _db.Hotels.Where(H=>H.cityId==sightseeings.CityId).ToList();
+            List<HotelDistancesViewModel> hotelDistances = new List<HotelDistancesViewModel>();
+            foreach(var hotel in hotels )
+            {
+                double dis = DistanceCalculator.CalculateDistance(sightseeings.lat, sightseeings.lon, hotel.lat, hotel.lon);
+                hotelDistances.Add(new HotelDistancesViewModel() { distance = dis,Hotel=hotel });
+            }
+            var comments = _db.Comment.Where(c=>c.SightseeingId == id&&c.State==1).Include(c=>c.Users).ToList();
+            if (!comments.Any()) { comments = null; }
+            var pictures = _db.Pictures.Where(p=>p.SightseeingId==id && p.state==1).ToList();
+            if (!pictures.Any()) { pictures = null; }
             SightseeingViewModel model = new SightseeingViewModel()
             {
                 Comments = comments,
-                Pictures= pictures
+                Pictures= pictures,
+                sightseeing=sightseeings,
+                Hot_Dis = hotelDistances
             };
-            if (sightseeing == null)
-            {
-                return NotFound();
-            }
+           
 
             return View(model);
 
@@ -48,50 +55,54 @@ namespace iranAttractions.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         //it most done with admin
         //so it must be placed in admin controller
         //and add a Role Admin To it
 
-        public IActionResult AddBook(PIctureViewModel model)
+        public IActionResult AddPicture(int Id, IFormFile Picture)
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
 
-            if (ModelState.IsValid)
-            {
-                if (model.Picture != null && model.Picture.Length > 0)
+           
+                if (Picture != null && Picture.Length > 0)
                 {
-                    var fileName = Path.GetFileNameWithoutExtension(model.Picture.FileName);
-                    var extension = Path.GetExtension(model.Picture.FileName);
+                    var fileName = Path.GetFileNameWithoutExtension(Picture.FileName);
+                    var extension = Path.GetExtension(Picture.FileName);
                     var uniqueFileName = $"{fileName}_{System.Guid.NewGuid()}{extension}";
                     var path = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", uniqueFileName);
                     if (!Directory.Exists(Path.Combine(_hostingEnvironment.WebRootPath, "uploads")))
                     {
                         Directory.CreateDirectory(Path.Combine(_hostingEnvironment.WebRootPath, "uploads"));
                     }
-                    using (var stream = new FileStream(path, FileMode.Create)) { model.Picture.CopyTo(stream); }
+                    using (var stream = new FileStream(path, FileMode.Create)) {Picture.CopyTo(stream); }
 
                     Picture pic = new Picture()
                     {
-                        FilePath = path,
+                        FilePath = uniqueFileName,
                         dateImported = DateTime.Now,
                         likecounts =0 ,
-                        SightseeingId = model.SightseeingId,
-                        UserPhonenumber = userId
+                        SightseeingId = Id,
+                        UserPhonenumber = userId,
+                        state=0
                  
                     };
+                _db.Pictures.Add(pic);
+                _db.SaveChanges();
 
-                    return RedirectToAction();
+                    return RedirectToAction("DisplayInfoes", new { id = Id });
                 }
-            }
+            return RedirectToAction("DisplayInfoes", new { id =Id });
 
-            return View();
         }
 
-    
+
+
+
 
         [HttpPost]
         [Authorize]
-        public IActionResult AddComment(int SightseeingId, string Description, string UserName)
+        public IActionResult AddComment(int SightseeingId, string Description, string UserName ,string picurl)
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
             var sightseeing = _db.sightseeing.Include(s => s.Comments).ThenInclude(c => c.Users).FirstOrDefault(s => s.Id == SightseeingId);
@@ -110,7 +121,8 @@ namespace iranAttractions.Controllers
                     Description = Description,
                     UserPhonenumber = userId,
                     Users = user,
-                    Sightseeings = sightseeing
+                    Sightseeings = sightseeing,
+                    picurl = picurl
                 };
 
                 _db.Add(com);

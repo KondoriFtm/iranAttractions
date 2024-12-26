@@ -1,0 +1,45 @@
+﻿@model List<iranAttractions.Models.Picture>
+    @{
+    ViewData["Title"] = "DisplayPictures";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">عکس ها</h1>
+</div>
+
+<canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="905" height="30" style="display: block; width: 905px; height: 30px;"></canvas>
+
+<div class="album py-5 bg-light1">
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            
+                @foreach(var pic in Model)
+                {
+                <div class="col">
+                    @{string src = "/uploads/" + pic.FilePath;
+}
+                    
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="@src" alt="Your Image Description">
+
+                        <div class="card-body">
+                            <p class="card-text">نام استان: @pic.sightseeing.Name</p>
+                            <p class="card-text">نام جاذبه: @pic.sightseeing.City.Name</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a class="btn btn-success btn-sm" asp-action="Confirm_pic" asp-route-id="@pic.Id">انتشار</a>
+                                    <a class="btn btn-danger btn-sm" asp-action="Delete_pic" asp-route-id="@pic.Id">حذف</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                }
+               
+        </div>
+    </div>
+</div>
+  

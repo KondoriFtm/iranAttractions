@@ -8,7 +8,9 @@ namespace iranAttractions.ViewModels
 
         public List<Picture> Pictures { get; set; }
 
-        public PIctureViewModel PictureModel { get; set; }
+        public List<HotelDistancesViewModel> Hot_Dis { get; set; }
+
+       
 
         public Sightseeing sightseeing { get; set; }
     }

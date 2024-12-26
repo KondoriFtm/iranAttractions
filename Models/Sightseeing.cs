@@ -8,6 +8,10 @@
 
         public string Description { get; set; }
 
+        public double lat { get; set; }
+
+        public double lon { get; set; }
+
         public int CityId {  get; set; }
 
         public virtual City City { get; set; }

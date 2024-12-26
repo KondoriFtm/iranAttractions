@@ -1,6 +1,6 @@
 .site-header {
     width: 100%;
-    background-image: url("~/img/b4.jpg");
+    background-image: url("../img/images.jpg");
     opacity: .95;
     height: 400px;
     background-size: cover;
@@ -9,20 +9,21 @@
     display: flex;
     position: relative;
     justify-content: center;
-    text-align:center;nlkkjjjjjjjjjjjjjjjbv                                                           
+    text-align: center;
+    nlkkjjjjjjjjjjjjjjjbv
 }
 
 .navbar {
     display: flex;
     position: fixed;
-    top: 20px;
+    top:0;
     justify-content: center;
     background-color: #daa38f;
     height: 60px; /* ÇÑÊÝÇÚ ãÔÎÕ */
     width: 100%; /* ÚÑÖ ˜Çãá */
     padding: 10px 20px;
     align-items: center;
-    z-index: 1000;
+    z-index: 1001;
 }
 
     .navbar ul {

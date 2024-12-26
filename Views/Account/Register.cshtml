@@ -1,0 +1,60 @@
+﻿@model iranAttractions.ViewModels.RegisterViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود و ثبت نام</title>
+    <link href="../CSS/login-register.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+
+    <div class="login-reg-panel">
+        <div class="register-info-box">
+            <h2>حساب کاربری دارید؟</h2>
+            <div class="btn">
+                <a id="label-register" asp-action="Login"> ورود</a>
+                <input type="radio" name="active-log-panel" id="log-login-show">
+            </div>
+        </div>
+
+      
+
+        <div class="white-panel ">
+            
+                <div class="login-show show-log-panel">
+
+                    <h2>ثبت نام</h2>
+                    <form asp-action="Register" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <input asp-for="phonenumber" type="text" placeholder="شماره تماس">
+                        <span asp-validation-for="phonenumber" class="text-danger"></span>
+
+                        <input asp-for="username" type="text" placeholder="نام کاربری">
+                        <span asp-validation-for="username" class="text-danger"></span>
+
+                        <input asp-for="password" type="password" placeholder="رمز عبور">
+                        <span asp-validation-for="password" class="text-danger"></span>
+
+                        <input asp-for="Repeatpassword" type="password" placeholder="تکرار رمز عبور">
+                        <span asp-validation-for="Repeatpassword" class="text-danger"></span>
+
+
+
+                        <div class="btn" >
+                            <button type="submit">ثبت نام </button>
+                        </div>
+                </form>
+
+                </div>
+
+        </div>
+    </div>
+
+
+</body>
+</html>
