@@ -94,6 +94,10 @@
                                             <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                         </svg>
                                         <h4 class="h6 text-white bsb-hover-fadeInRight mt-2">راه ارتباطی: @resturant.resturant.CommunicationRel</h4>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="fas fa-phone text-white bsb-hover-fadeInLeft" viewBox="0 0 16 16">
+                                        <path d="M3.654 1.328a.678.678 0 0 1 .738-.18l2.522 1.008c.193.077.326.24.362.44l.483 2.843a.678.678 0 0 1-.203.592l-1.004 1.004c.453.786 1.016 1.511 1.689 2.184.673.673 1.398 1.236 2.184 1.689l1.004-1.004a.678.678 0 0 1 .592-.203l2.843.483c.2.036.363.169.44.362l1.008 2.522a.678.678 0 0 1-.18.738l-2.307 2.307a1.745 1.745 0 0 1-1.747.451c-2.014-.716-3.967-2.05-5.787-3.87-1.82-1.82-3.154-3.773-3.87-5.787a1.745 1.745 0 0 1 .451-1.747L3.654 1.328z" />
+                                        </svg>
+                                            <h5 class="h6 text-white bsb-hover-fadeInRight mt-2">  @resturant.resturant.PhoneNumber:شماره تماس</h5>
                                     </figcaption>
                                 </figure>
                                 <div class="card-body m-0 p-0">
@@ -104,32 +108,31 @@
                                     </div>
                                 </div>
                                 <div class="card-footer border-0 bg-transparent p-0 m-0">
-                                    <ul class="entry-meta list-unstyled d-flex align-items-center m-0">
-                                        <li>
+                                        <ul class="entry-meta list-unstyled m-0">
+                                        <li class="mb-2">
                                                 
                                             <a class="fs-7 link-secondary text-decoration-none d-flex align-items-center" href="#!">
                                                 <i class="fas fa-route"></i>
                                                     @if (resturant.distance < 1)
                                                     {
                                                         double dis = resturant.distance * 1000;
-                                                        <span class="ms-2 fs-7">@dis فاصله:متر</span>
+                                                        <span class="ms-2 fs-7"> فاصله:@dis متر</span>
                                                     }
                                                     else
                                                     {
-                                                        <span class="ms-2 fs-7">@resturant.distance فاصله:کیلومتر</span>
+                                                        <span class="ms-2 fs-7"> فاصله:@resturant.distance کیلومتر</span>
                                                     }
                                                 
                                             </a>
                                         </li>
-                                        <li>
-                                            <span class="px-3">&bull;</span>
-                                        </li>
-                                        <li>
-                                            <a class="link-secondary text-decoration-none d-flex align-items-center" href="#!">
-                                                <i class="fas fa-phone"></i>
-                                                <span class="ms-2 fs-7">@resturant.resturant.PhoneNumber : شماره تماس</span>
-                                            </a>
-                                        </li>
+                                            <li>
+                                                <a class="fs-7 link-secondary text-decoration-none d-flex align-items-center" href="#!">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    <span class="ms-2 fs-7">  آدرس : @resturant.resturant.address</span>
+                                                </a>
+                                            </li>
+                                       
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -185,7 +188,11 @@
                                                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
                                                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                             </svg>
-                                            <h4 class="h6 text-white bsb-hover-fadeInRight mt-2">راه ارتباطی: </h4>
+                                            <h4 class="h6 text-white bsb-hover-fadeInRight mt-2">راه ارتباطی: @hotel.Hotel.CommunicationRel</h4>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="fas fa-phone text-white bsb-hover-fadeInLeft" viewBox="0 0 16 16">
+                                                <path d="M3.654 1.328a.678.678 0 0 1 .738-.18l2.522 1.008c.193.077.326.24.362.44l.483 2.843a.678.678 0 0 1-.203.592l-1.004 1.004c.453.786 1.016 1.511 1.689 2.184.673.673 1.398 1.236 2.184 1.689l1.004-1.004a.678.678 0 0 1 .592-.203l2.843.483c.2.036.363.169.44.362l1.008 2.522a.678.678 0 0 1-.18.738l-2.307 2.307a1.745 1.745 0 0 1-1.747.451c-2.014-.716-3.967-2.05-5.787-3.87-1.82-1.82-3.154-3.773-3.87-5.787a1.745 1.745 0 0 1 .451-1.747L3.654 1.328z" />
+                                            </svg>
+                                            <h5 class="h6 text-white bsb-hover-fadeInRight mt-2">: @hotel.Hotel.PhoneNumber شماره تماس</h5>
                                         </figcaption>
                                     </figure>
                                     <div class="card-body m-0 p-0">
@@ -196,28 +203,25 @@
                                         </div>
                                     </div>
                                     <div class="card-footer border-0 bg-transparent p-0 m-0">
-                                        <ul class="entry-meta list-unstyled d-flex align-items-center m-0">
-                                            <li>
+                                        <ul class="entry-meta list-unstyled m-0">
+                                            <li class="mb-2">
                                                 <a class="fs-7 link-secondary text-decoration-none d-flex align-items-center" href="#!">
                                                     <i class="fas fa-route"></i>
                                                     @if (hotel.distance < 1)
                                                     {
                                                         double dis = hotel.distance * 1000;
-                                                        <span class="ms-2 fs-7">@dis فاصله:متر</span>
+                                                        <span class="ms-2 fs-7"> فاصله: @dis متر </span>
                                                     }
                                                     else
                                                     {
-                                                        <span class="ms-2 fs-7">@hotel.distance فاصله:کیلومتر</span>
+                                                        <span class="ms-2 fs-7"> فاصله: @hotel.distance کیلومتر</span>
                                                     }
                                                 </a>
                                             </li>
                                             <li>
-                                                <span class="px-3">&bull;</span>
-                                            </li>
-                                            <li>
-                                                <a class="link-secondary text-decoration-none d-flex align-items-center" href="#!">
-                                                    <i class="fas fa-phone"></i>
-                                                    <span class="ms-2 fs-7">@hotel.Hotel.address : شماره تماس</span>
+                                                <a class="fs-7 link-secondary text-decoration-none d-flex align-items-center" href="#!">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    <span class="ms-2 fs-7">آدرس : @hotel.Hotel.address</span>
                                                 </a>
                                             </li>
                                         </ul>
