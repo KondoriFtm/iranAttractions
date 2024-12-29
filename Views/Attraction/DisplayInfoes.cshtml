@@ -13,33 +13,30 @@
 
 <div class="main-slider">
     <div class="main-slide active">
-        <img src="~/img/naghshejahan.jfif" alt="Image 1">
+        @{
+            string srces = "~/img/" + Model.sightseeing.parts[0].PicUrl;
+            var imgUrle = Url.Content(srces);
+        }
+        <img src="@imgUrle" alt="Image 1">
         <div class="main-caption">
-            <h1>میدان نقش جهان</h1>
-            <p>میدان نقش جهان که به صورت رسمی با عنوان میدان امام شناخته می‌شود، میدان مرکزی شهر اصفهان است و بخشی از یک مجموعه تاریخی به شمار می‌رود. آنچه که این میدان را از سایر همتایانش متمایز می‌کند شکل مستطیلی آن است که با ظاهر دایره‌ای یا بیضی شکلِ بسیاری از میادین معمول و رایج، تفاوت دارد. این میدان مستطیلی، ۵۶۰ متر و ۱۶۰ متر عرض دارد و یا به عبارت دیگر طول آن با 430 قدم و عرض آن با 160 قدم طی می‌شود.</p>
+            <h1>@Model.sightseeing.parts[0].Title</h1>
+            <p>  @Model.sightseeing.parts[0].Description   </p>
         </div>
     </div>
-    <div class="main-slide">
-        <img src="~/img/meidannaghshejahan.jpg" alt="Image 2">
-        <div class="main-caption">
-            <h1>دیدنی های میدان نقش جهان</h1>
-            <p>این میدان در میان خود، حوض بزرگی دارد که زیبایی رقص فواره هایش زبانزد خاص و عام است. گذرگاه های متعدد به شما اجازه می دهند که به راحتی در جای جای میدان حرکت کنید و از تماشای زیبایی های آن لذت ببرید. در دو ضلع این میدان بناهای مذهبی و مساجد قرار دارند و در ضلعی دیگر یک کاخ تماشایی مشاهده می شود.</p>
+    @for(int i=1;i<Model.sightseeing.parts.Count;i++)
+    {
+        string srce = "~/img/" + Model.sightseeing.parts[i].PicUrl;
+        var imgUrl = Url.Content(srce);
+        <div class="main-slide">
+            <img src="@imgUrl" alt="Image 2">
+            <div class="main-caption">
+                <h1>@Model.sightseeing.parts[i].Title</h1>
+                <p> @Model.sightseeing.parts[i].Description</p>
+            </div>
         </div>
-    </div>
-    <div class="main-slide">
-        <img src="~/img/naghshejahan.jpg" alt="Image 3">
-        <div class="main-caption">
-            <h1>مسجد شیخ لطف الله</h1>
-            <p>در گوشه ای از این میدان تاریخی، گنبد زیبای یک مسجد، توجه هر رهگذری را به خود جلب می کند چرا که بر خلاف سایر مساجد که مناره های شان به سوی آبی آسمان رفته اند، بر فراز آن هیچ مناره ای مشاهده نمی شود. مسجد شیخ لطف الله یکی از مساجد خاص ایران است که در دوران صفوی ساخته شده و امروزه به عنوان یکی از دیدنی های مجموعه نقش جهان و در میان مساجد تاریخی اصفهان طرفداران بسیاری دارد.</p>
-        </div>
-    </div>
-    <div class="main-slide">
-        <img src="~/img/alighapo.jpg" alt="Image 4">
-        <div class="main-caption">
-            <h1>بازار قیصریه</h1>
-            <p>بازار اصفهان یکی از بزرگترین و زیباترین بازار های ایران است و به دلیل حضور در میدان نقش جهان، یکی از ممتازترین بازارهای ایران از نظر موقعیت گردشگری به شمار می رود.بخشی از این بازار با عنوان بازار قیصریه شناخته می شود که ورودی آن در میدان نقش جهان، توسط سردری زیبا مشخص شده است. راسته های اصلی و فرعی زیادی در این بازار وجود دارد که از میان آنها می توان به سماور سازها، مَخلص، مقصودبیک، هارونیه، نیم آورد گلشن، شَله و ... اشاره کرد.</p>
-        </div>
-    </div>
+    }
+   
+  
     <div class="navigation">
         <button class="prev" onclick="prevSlide()">&#10094;</button>
         <button class="next" onclick="nextSlide()">&#10095;</button>
@@ -389,7 +386,7 @@
            
         </section>
     </div>
-</div>
+
 
 
 
