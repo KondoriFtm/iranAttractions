@@ -13,8 +13,10 @@
     @RenderSection("Styles", required: false)  
     
     <style>
-         
 
+        
+       
+ 
         .navbar {
             display: flex;
             position: fixed;
@@ -193,5 +195,66 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="/javaScript/pop-up1.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+
+
+
+
+
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('.like-button').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const galleryItem = this.closest('.gallery-item');
+                        const pictureId = parseInt(galleryItem.getAttribute('data-picture-id'), 10); // Convert to integer
+                        console.log('Picture ID (Parsed):', pictureId);
+
+                        if (isNaN(pictureId)) {
+                            console.error('Invalid pictureId:', pictureId);
+                            return;
+                        }
+
+                        const liked = this.getAttribute('data-liked') === 'true';
+                        const url = liked ? "@Url.Action("Unlike", "attraction")" : "@Url.Action("Like", "attraction")";
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('POST', url, true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+
+                        xhr.onreadystatechange = function () {
+                           
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                    console.log('Raw Response:', xhr.responseText);
+                                    try {
+                                        var jsonData = JSON.parse(xhr.responseText);
+                                        console.log('Parsed Response:', jsonData);
+                                        likeCountElement = button.querySelector('.like-count');
+                                likeCountElement.textContent = jsonData.likes;
+
+                                        button.setAttribute('data-liked', !liked);
+                                       
+                                    } catch (e) {
+                                        console.error('Error parsing JSON:', e);
+                                    }
+                                } else {
+                                    console.error('Request failed with status:', xhr.status);
+                                }
+                            
+                        };
+
+                    const requestBody = `pictureId=${encodeURIComponent(pictureId)}`;
+                    console.log('Request Body:', requestBody); 
+                    xhr.send(requestBody);
+                    });
+                });
+            });
+        </script>
+    
+
+    
+
+   
+
 </body>
 </html>

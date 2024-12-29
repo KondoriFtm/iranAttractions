@@ -149,6 +149,32 @@ namespace iranAttractions.Controllers
             return RedirectToAction("DisplayInfoes", new { id = SightseeingId });
 
         }
+          
+
+            [HttpPost]
+            public IActionResult Like(int pictureId)
+            {
+                var picture = _db.Pictures.Find(pictureId);
+                if (picture != null)
+                {
+                    picture.likecounts++;
+                    _db.SaveChanges();
+                }
+                return Json(new { likes = picture.likecounts });
+            }
+
+            [HttpPost]
+            public IActionResult Unlike(int pictureId)
+            {
+                var picture = _db.Pictures.Find(pictureId);
+                if (picture != null && picture.likecounts > 0)
+                {
+                    picture.likecounts--;
+                    _db.SaveChanges();
+                }
+                return Json(new { likes = picture.likecounts });
+            }
+         
 
     }
 }

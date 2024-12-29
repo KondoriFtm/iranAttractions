@@ -298,14 +298,14 @@ body {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    width: 30px;
+    /*width: 30px;*/
     height: 30px;
     background: url("../img/heart-outline.png") no-repeat center;
     background-size: contain;
     cursor: pointer;
     opacity: 0;
     transition: all 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.6);
+    /*background-color: rgba(255, 255, 255, 0.6);*/
     border-radius: 30%;
 }
 
@@ -317,7 +317,7 @@ body {
 .like-button.liked {
     background: url("../img/heart-filled.png") no-repeat center;
     background-size: contain;
-    background-color: rgba(255, 0, 0, 0.4);
+    /*background-color: rgba(255, 0, 0, 0.4);*/
     opacity: 1;
     transform: scale(1.2);
 }
@@ -835,4 +835,25 @@ section {
 
 #resturants section {
     background-color: #eef5f9;
+}
+
+
+.like-button {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+}
+
+    .like-button svg {
+        width: 24px;
+        height: 24px;
+        fill: gray;
+    }
+
+    .like-button[data-liked="true"] svg {
+        fill: red;
+    }
+
+.like-count {
+    display: inline-block; /* Ensure it is displayed inline */
 }
