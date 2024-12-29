@@ -6,6 +6,9 @@
     <title>@ViewData["Title"] - iranAttractions</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href='https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/css/footer.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Vazir&display=swap" rel="stylesheet">
+
     @RenderSection("mainPage", required: false) 
     @RenderSection("Styles", required: false)  
     
@@ -129,11 +132,47 @@
     </header>
       
         @RenderBody()
-        
-    
 
-    <footer class="border-top footer text-muted">
-        
+
+
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Logo and Header Menus -->
+            <div class="footer-left">
+                <a href="/" class="footer-logo">
+                    <img alt="لوگو" class="logo" src="#" width="128" height="34">
+                </a>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">ورود | ثبت نام</a>
+                    <a href="#" class="footer-link">استان ها</a>
+                    <a href="#" class="footer-link">گالری</a>
+                    <a href="#" class="footer-link new-item">هتل ها و رستوران ها<span class="new-badge">جدید</span></a>
+                </div>
+            </div>
+
+            <!-- Subscribe Form -->
+            <div class="footer-subscribe">
+                <p class="subscribe-label">لطفا نکات و پیشنهادات ویژه را برای ما ارسال کنید!</p>
+                <form class="subscribe-form">
+                    <input type="email" class="subscribe-input" placeholder="ایمیل خود را وارد کنید" />
+                    <button type="submit" class="subscribe-btn">اشتراک</button>
+                </form>
+                <p class="disclaimer">با ارسال اطلاعات، شما با <a href="#" target="_blank" class="disclaimer-link" style="color:#fc5203 ;">سیاست حفظ حریم خصوصی</a> و <a href="#" target="_blank" class="disclaimer-link" style="color: #fc5203;">شرایط استفاده</a> موافقت می کنید.</p>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="footer-left-bottom">
+                <p>© 2024 Safaro.com تمامی حقوق محفوظ است.</p>
+            </div>
+            <div class="footer-right-bottom">
+                <a href="https://smartertravelmedia.zendesk.com/hc/en-us/requests/new?ticket_form_id=4417042834580" target="_blank" class="footer-link">تماس با ما</a>
+                <a href="https://www.oyster.com/oyster-terms-of-use/" target="_self" class="footer-link">شرایط استفاده</a>
+                <a href="https://www.smartertravel.com/privacy-policy/" target="_self" class="footer-link">سیاست حفظ حریم خصوصی و کوکی‌ها</a>
+                <button class="cookie-btn" aria-label="تنظیمات کوکی">تنظیمات کوکی</button>
+            </div>
+        </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

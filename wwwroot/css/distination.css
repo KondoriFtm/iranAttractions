@@ -19,7 +19,6 @@ body, html {
     position: relative;
     max-width: 100%;
     overflow: hidden;
-    margin: 30px;
     border-radius: 10px;
     margin-top: 20px;
 }
@@ -154,7 +153,7 @@ section {
     padding: 50px;
     margin: 20px 0;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 #restaurants {
@@ -252,8 +251,7 @@ div.desc {
 
 body {
     display: grid;
-    place-items: center;
-    min-height: 100vh;
+     min-height: 100vh;
     background: var(--gradient-9);
 }
 
@@ -741,9 +739,9 @@ body {
 
 section {
     padding: 50px;
-    background-color: #f5f9f6;
+    background-color: #fff;
     text-align: center;
-    box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.884);
+    box-shadow: 0px 0px 6px rgba(128, 128, 128, 0.44);
 }
 
 #add-comment-section {
@@ -833,4 +831,8 @@ section {
 
 .additional-resturants {
     display: none;
+}
+
+#resturants section {
+    background-color: #eef5f9;
 }

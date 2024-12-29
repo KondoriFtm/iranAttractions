@@ -1,0 +1,179 @@
+
+
+body {
+    font-family: 'Vazir', sans-serif; /* Persian Font */
+}
+
+.footer {
+    background-color: #2E2E2E; /* Dark grayish teal */
+    color: #f2f2f2; /* Light gray for text */
+    padding: 40px 16px;
+    direction: rtl; /* Right-to-left for Persian */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-logo img {
+    width: 128px;
+    height: auto;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-link {
+    color: #f2f2f2;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: semi-bold;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #f98896; /* Hover color */
+}
+
+.new-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.new-badge {
+    background-color: #f2f2f2;
+    color: #4b5d5e;
+    font-size: 10px;
+    padding: 3px 6px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+/* Subscribe Section */
+.footer-subscribe {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.subscribe-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #f2f2f2;
+}
+
+.subscribe-form {
+    display: flex;
+    gap: 12px;
+}
+
+.subscribe-input {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 300px;
+    outline: none;
+    background-color: #fff;
+    color: #333;
+}
+
+.subscribe-btn {
+    background-color: #fc5203; /* Button color */
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: semi-bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.subscribe-btn:hover {
+    background-color: #f98896; /* Hover color */
+}
+
+.disclaimer {
+    font-size: 12px;
+    font-weight: light;
+    color: #f2f2f2;
+}
+
+.disclaimer-link {
+    color: #f2f2f2;
+    text-decoration: none;
+}
+
+.disclaimer-link:hover {
+    color: #f98896; /* Hover color */
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    border-top: 1px solid #6d7d7e;
+    padding-top: 20px;
+    font-size: 14px;
+    color: #d6d6d6;
+}
+
+.footer-left-bottom p {
+    color: #f2f2f2;
+}
+
+.footer-right-bottom {
+    display: flex;
+    gap: 24px;
+}
+
+.cookie-btn {
+    background-color: transparent;
+    border: none;
+    color: #f2f2f2;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.cookie-btn:hover {
+    color: #f98896; /* Hover color */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-left,
+    .footer-subscribe {
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
