@@ -1,6 +1,124 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model iranAttractions.ViewModels.MainViewModel
 
-<p>Use this page to detail your site's privacy policy.</p>
+
+@{
+    ViewData["Title"] = "DisplayBoxes";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - iranAttractions</title>
+    <link href='https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+ 
+</head>
+    
+ 
+
+
+<body style ="font-family: Sahel">
+    <header class="site-header">
+
+        <nav class="navbar">
+
+            <ul>
+                <li><img src="~/img/33.jpg" alt="Logo" class="logo"></li>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">استان ها</a>
+                    <div class="dropdown-content">
+                        @foreach (var city in Model.Cities)
+                        {
+                            <a class="pic-link" asp-action="DisplayProvince" asp-controller="Province" asp-route-ItemId="@city.Id">
+
+                                <button class="pic-button">@city.Name</button>
+
+                            </a>
+                        }
+                        <!-- سایر استان‌ها را اینجا اضافه کنید -->
+                    </div>
+                </li>
+                <li><a asp-action="PictureList" asp-controller="Album">گالری</a></li>
+                <li><a asp-action="privacy" asp-controller="Home">خانه</a></li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a asp-controller="Account" asp-action="Logout">خروج</a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a asp-controller="Account" asp-action="Login">ورود / ثبت نام</a>
+                    </li>
+
+                }
+            </ul>
+        </nav>
+        <div class="header-content">
+            <h1 class="site-title">SAFAّRO&nbsp;</h1>
+            <p class="site-tagline"> "هر مقصد یک داستان ، هر سفر یک خاطره"</p>
+            <form asp-action="SearchResultCity" asp-controller="Home" method="post">
+                <input type="text" class="search-box" name="query" placeholder="جستجو">
+                <input type="submit" value="بزن بریم">
+            </form>
+        </div>
+
+    </header>
+    <article class="site-content">
+
+        <!-- دیو استان‌ها -->
+        <div class="divprovince  ">
+            @for (int i = 0; i < 3; i++)
+            {
+                var city = Model.Cities[i];
+
+                <div class="gallery-container1  ">
+                    <a type="button" class="pic-link" asp-action="DisplayProvince" asp-controller="Province" asp-route-ItemId="@city.Id">
+                        <div class="image-wrapper">
+                            <img class="gallery" src="~/img/City@(city.Id).jpg" alt="تصویری یافت نشد">
+                            <div class="image-title">@city.Name</div>
+ 
+                        </div>
+                    </a>
+                </div>
+            }
+            <div class="description-container des-con1">
+                <h3>ایران سرزمین ماندگار</h3>
+                <p>  اگر هنوز مقصد شما برای تعطیلات مشخص نیست نگران نباشید لیستی از استان های ایران را اینجا میتئانید ببینید . با کلیک روی هر کدام جاذبه ای آن استانوهتل ها و رستئران های آن را شاهده میکنید و بهتر میتوانید تصمیم بگیرید به کدام شهر سفر کنید  
+
+                </p>
+            </div>
+        </div>
+
+       
+        <!-- دیو جاذبه‌ها -->
+        <div class="divattraction">
+            <div class="description-container des-con2">
+                <h3>جاذبه گرد</h3>
+                <p>اگر مقصد شما بری سفر به یکی از استان های ایران جان مشخص شده ولی هنوز نمیدانید برای برنامه سفر خود به کدام جاذبه یا مکان تفریحی آن استان سفر کنید نگران نباسنبشاید <br />    .</p> </div>
+
+            @for (int i = 0; i < 3; i++)
+            {
+                var sightseeing = Model.sightseeings[i];
+                <div class="gallery-container2">
+                    <a type="button" class="pic-link" asp-action="DisplayInfoes" asp-controller="Attraction" asp-route-Id="@sightseeing.Id">
+                        <div class="image-wrapper">
+                            <img class="gallery" src="~/img/Sight@(sightseeing.Id).jpg" alt="تصویری یافت نشد">
+                            <div class="image-title ">@sightseeing.City.Name / @sightseeing.Name</div>
+
+                        </div>
+                       
+
+                    </a>
+                 </div>
+            }
+        </div>
+
+    </article>
+
+</body>
+</html>

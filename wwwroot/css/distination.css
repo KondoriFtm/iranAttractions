@@ -208,13 +208,201 @@ div.desc {
     background-color: #eef5f9;
 }
 
+
+
+
+/*
+
+
+
+
+
+*/
+
+
+
+
+
 #gallery {
+    background: #f9f2f2;
+    display: flex;
+    flex-wrap: wrap;
+    /*flex-direction: column;
+  align-items: center;
+  min-height: 120vh;*/
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+}
+
+    #gallery h2 {
+        width: 100%;
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    #gallery .gallery-item {
+        flex: 1 1 calc(25% - 20px);
+    }
+
+@import "https://unpkg.com/open-props";
+@import "https://unpkg.com/open-props/normalize.min.css";
+
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background: var(--gradient-9);
+}
+
+:root {
+    --magnifier: 1.2;
+    --gap: 1vmin;
+    --transition: 0.5s;
+}
+
+.container {
+    width: 80vw;
+    height: auto;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: var(--gap);
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.gallery-item {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+}
+
+.gallery-img {
+    --brightness: 0.75;
+    --grayscale: 1;
+    transition: all var(--transition);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(var(--grayscale)) brightness(var(--brightness));
+}
+
+.gallery-item:hover .gallery-img {
+    --brightness: 1.15;
+    --grayscale: 0;
+    transform: scale(var(--magnifier));
+}
+
+.like-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: url("../img/heart-outline.png") no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 30%;
+}
+
+.gallery-item:hover .like-button {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.like-button.liked {
+    background: url("../img/heart-filled.png") no-repeat center;
+    background-size: contain;
+    background-color: rgba(255, 0, 0, 0.4);
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.upload-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    max-width: 400px;
+}
+
+    .upload-section h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .upload-section input[type="file"] {
+        margin-bottom: 10px;
+        display: none;
+    }
+
+    .upload-section label {
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 14px;
+    }
+
+        .upload-section label:hover {
+            background-color: #555;
+        }
+
+.image-preview {
+    width: 150px;
+    height: 150px;
+    border: 2px dashed #ccc;
+    background-color: #f2f2f2;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.upload-section button {
+    padding: 10px 20px;
+    background-color: #ff5733;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+}
+
+    .upload-section button:hover {
+        background-color: #e64925;
+    }
+
+
+
+
+
+
+
+   /* #gallery {
     background: #f9f2f2;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 120vh;
-}
+}*/
 
     #gallery h2 {
         font-size: 36px;
@@ -374,7 +562,6 @@ div.desc {
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     max-width: 400px;
-    margin-top: 100px;
 }
 
     .upload-section h3 {
@@ -638,4 +825,12 @@ section {
     height: 70px;
     border-radius: 50%;
     margin-top: 5px;
+}
+
+.additional-hotel {
+    display: none;
+}
+
+.additional-resturants {
+    display: none;
 }

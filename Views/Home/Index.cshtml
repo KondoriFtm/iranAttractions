@@ -1,5 +1,9 @@
 ﻿
 @model iranAttractions.ViewModels.MainViewModel
+@{
+    ViewData["Title"] = "DisplayBoxes";
+    Layout = null;
+}
 <!doctype html>
 <html lang="fa">
 <head>
@@ -7,6 +11,9 @@
     <title>Untitled Document</title>
     <link href="main.css" rel="stylesheet" type="text/css">
     <link href="gallery.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
 </head>
 
 <body>
@@ -15,7 +22,7 @@
         <nav class="navbar">
 
             <ul>
-                <li><img src="img/33.jpg" alt="Logo" class="logo"></li>
+                <li><img src="~/img/33.jpg" alt="Logo" class="logo"></li>
                 <li><a href="contact.html">تماس با ما</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">استان ها</a>
@@ -61,15 +68,15 @@
     <article class="site-content">
 
         <!-- دیو استان‌ها -->
-        <div class="divprovince">
-            <h2 class="province">لیست استان‌ها</h2>
+        <div class="divprovince  ">
+            <h2 class="province  ">لیست استان‌ها</h2>
             @for (int i = 0; i < 3; i++)
             {
                 var city = Model.Cities[i];
 
-                <div class="gallery-container1">
+                <div class="gallery-container1  ">
                     <a type="button" class="pic-link" asp-action="DisplayProvince" asp-controller="Province" asp-route-ItemId="@city.Id">
-                        <img class="gallery" src="img/City@(city.Id).jpg" alt="تصویری یافت نشد">
+                        <img class="gallery" src="~/img/City@(city.Id).jpg" alt="تصویری یافت نشد">
                         <button class="pic-button">@city.Name</button>
 
                     </a>
@@ -77,16 +84,18 @@
                 </div>
 
             }
+            
         </div>
         <!-- دیو جاذبه‌ها -->
         <div class="divattraction">
             <h2 class="province">لیست جاذبه‌ها</h2>
+            
             @for (int i = 0; i < 3; i++)
             {
                 var sightseeing = Model.sightseeings[i];
                 <div class="gallery-container2">
                     <a type="button" class="pic-link" asp-action="DisplayInfoes" asp-controller="Attraction" asp-route-ItemId="@sightseeing.Id">
-                        <img class="gallery" src="img/Sight@(sightseeing.Id).jpg" alt="تصویری یافت نشد">
+                        <img class="gallery" src="~/img/Sight@(sightseeing.Id).jpg" alt="تصویری یافت نشد">
                         <button class="pic-button">@sightseeing.City.Name</button>
 
                     </a>

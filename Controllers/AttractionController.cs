@@ -26,12 +26,28 @@ namespace iranAttractions.Controllers
                                    .Include(s=>s.parts)
                                    .FirstOrDefault(s => s.Id == id);
             var hotels = _db.Hotels.Where(H=>H.cityId==sightseeings.CityId).ToList();
+            
             List<HotelDistancesViewModel> hotelDistances = new List<HotelDistancesViewModel>();
             foreach(var hotel in hotels )
             {
                 double dis = DistanceCalculator.CalculateDistance(sightseeings.lat, sightseeings.lon, hotel.lat, hotel.lon);
+                dis =  Math.Round(dis, 5);
                 hotelDistances.Add(new HotelDistancesViewModel() { distance = dis,Hotel=hotel });
             }
+
+            hotelDistances = hotelDistances.OrderBy(h => h.distance).ToList();
+
+            var resturants = _db.Resturants.Where(H => H.cityId == sightseeings.CityId).ToList();
+
+            List<ResturantDistancesViewModel> ResturantDistances = new List<ResturantDistancesViewModel>();
+            foreach (var resturant in resturants)
+            {
+                double dis = DistanceCalculator.CalculateDistance(sightseeings.lat, sightseeings.lon, resturant.lat, resturant.lon);
+                dis = Math.Round(dis, 5);
+                ResturantDistances.Add(new ResturantDistancesViewModel() { distance = dis, resturant = resturant });
+            }
+
+            ResturantDistances = ResturantDistances.OrderBy(h => h.distance).ToList();
             var comments = _db.Comment.Where(c=>c.SightseeingId == id&&c.State==1).Include(c=>c.Users).ToList();
             if (!comments.Any()) { comments = null; }
             var pictures = _db.Pictures.Where(p=>p.SightseeingId==id && p.state==1).ToList();
@@ -41,7 +57,8 @@ namespace iranAttractions.Controllers
                 Comments = comments,
                 Pictures= pictures,
                 sightseeing=sightseeings,
-                Hot_Dis = hotelDistances
+                Hot_Dis = hotelDistances,
+                Res_Dis = ResturantDistances
             };
            
 

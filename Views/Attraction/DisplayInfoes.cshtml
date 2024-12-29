@@ -3,6 +3,11 @@
 @model iranAttractions.ViewModels.SightseeingViewModel
 @section Styles {
     <link rel="stylesheet" href="~/css/distination.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/blogs/blog-5/assets/css/blog-5.css">
+   
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 }
 
 
@@ -40,78 +45,259 @@
         <button class="next" onclick="nextSlide()">&#10095;</button>
     </div>
 </div>
+
 <div class="main">
-    <div class="main_container">
-        <div class="navbar2">
+
+        
+
+    <div class="navbar d-flex justify-content-center align-items-center">
+        <div class="w-50 d-flex justify-content-center align-items-center">
             <a href="#restaurants">رستوران‌ها</a>
             <a href="#hotels">هتل‌ها</a>
             <a href="#gallery">گالری</a>
             <a href="#reviews">نظرات</a>
         </div>
-        <section id="hotels">
-            <h2>هتل‌ها</h2>
-            @for(int i=0; i<4; i++)
-            {
-                <div class="responsive">
-                    <div class="gallery">
-                        <a target="_blank" href="img_5terre.jpg">
-                            @{
-                                string src = Url.Content("~/img/Hotels/" + Model.Hot_Dis[i].Hotel.Id.ToString() + ".jpg");
-                            }
 
-                            <img src="@src" alt="Cinque Terre" width="600" height="400">
-                        </a>
-                        <div class="desc">@Model.Hot_Dis[i].distance ,  @Model.Hot_Dis[i].Hotel.Name</div>
+    </div>
+
+
+
+
+
+    <section id="resturants">
+        <section class="bsb-blog-5 py-3 py-md-5 py-xl-8">
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+                        <h2 class="display-5 mb-4 mb-md-5 text-center">نزدیک ترین رستوران‌ها به این جاذبه</h2>
+                        <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
                     </div>
                 </div>
-                
-            }
-            
-           
-            <div class="clearfix"></div>
-        </section>
-       
-        <section id="gallery">
-            <h2>گالری</h2>
-            <!--<div>
-              <p>تصویری برای نمایش وجود ندارد!</p>
-            </div>-->
-           
-            <div class="gallery-container">
-                @if (Model.Pictures != null)
-                {
-                    <div class="gallery-container">
-                        @for (var i = 0; i < Model.Pictures.Count; i++)
-                        {
-                            var pic = Model.Pictures[i];
-                            string src = "~/uploads/" + pic.FilePath;
-                            var imgUrl = Url.Content(src);
-                            string[] unitsMap = {"one","two","three","four","five" };
-                            string className = "box " + unitsMap[i]; // Create a unique class name for each box
+            </div>
+            <div class="container overflow-hidden">
+                <div class="row gy-4 gy-md-5 gx-xl-6 gy-xl-6 gx-xxl-9 gy-xxl-9" id="resturant-list">
+                     @for(int i =0 ; i<Model.Res_Dis.Count;i++)
+                    {
+                        var resturant = Model.Res_Dis[i];
+                        var additionalClass = i >= 3 ? ".additional-resturants" : "";
+                        <div class="col-12 col-lg-4 @additionalClass">
+                        <article>
+                            <div class="card border-0 bg-transparent ">
 
-                            <div class="@className" style="--img:url('@imgUrl');" data-text="star lord">
-                                <div class="like-button"></div>
+                                <figure class="card-img-top mb-4 overflow-hidden bsb-overlay-hover">
+                                    <a href="#!">
+                                        <img class="img-fluid bsb-scale bsb-hover-scale-up" loading="lazy" src="/img/alighapo.jpg" alt="Living">
+                                    </a>
+                                    <figcaption>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-eye text-white bsb-hover-fadeInLeft" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                        </svg>
+                                        <h4 class="h6 text-white bsb-hover-fadeInRight mt-2">راه ارتباطی: @resturant.resturant.CommunicationRel</h4>
+                                    </figcaption>
+                                </figure>
+                                <div class="card-body m-0 p-0">
+                                    <div class="entry-header mb-3">
+                                        <h2 class="card-title entry-title h4 m-0">
+                                            <a class="link-dark text-decoration-none" href="#!">@resturant.resturant.Name</a>
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="card-footer border-0 bg-transparent p-0 m-0">
+                                    <ul class="entry-meta list-unstyled d-flex align-items-center m-0">
+                                        <li>
+                                                
+                                            <a class="fs-7 link-secondary text-decoration-none d-flex align-items-center" href="#!">
+                                                <i class="fas fa-route"></i>
+                                                    @if (resturant.distance < 1)
+                                                    {
+                                                        double dis = resturant.distance * 1000;
+                                                        <span class="ms-2 fs-7">@dis فاصله:متر</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="ms-2 fs-7">@resturant.distance فاصله:کیلومتر</span>
+                                                    }
+                                                
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <span class="px-3">&bull;</span>
+                                        </li>
+                                        <li>
+                                            <a class="link-secondary text-decoration-none d-flex align-items-center" href="#!">
+                                                <i class="fas fa-phone"></i>
+                                                <span class="ms-2 fs-7">@resturant.resturant.PhoneNumber : شماره تماس</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        }
+                        </article>
                     </div>
+                    
+                    }
+                </div>
+            </div>
+            
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <button id="load-more-resturant" class="btn bsb-btn-2xl btn-primary rounded-pill mt-5 mt-xl-10" data-expanded="false">نمایش بیشتر</button>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </section>
 
+
+
+
+    <section id="hotels">
+        <section class="bsb-blog-5 py-3 py-md-5 py-xl-8">
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+                        <h2 class="display-5 mb-4 mb-md-5 text-center">نزدیک ترین هتل ها به این جاذبه</h2>
+                        <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+                    </div>
+                </div>
+            </div>
+            <div class="container overflow-hidden">
+                <div class="row gy-4 gy-md-5 gx-xl-6 gy-xl-6 gx-xxl-9 gy-xxl-9" id="hotel-list">
+                    @for(int i =0 ; i<Model.Hot_Dis.Count;i++)
+                    {
+                        var hotel = Model.Hot_Dis[i]; 
+                        var additionalClass = i >= 3 ? "additional-hotel" : "";
+
+                        <div class="col-12 col-lg-4 @additionalClass">
+                            <article>
+                                <div class="card border-0 bg-transparent">
+                                    <figure class="card-img-top mb-4 overflow-hidden bsb-overlay-hover">
+                                            @{
+                                                string src = Url.Content("~/img/Hotels/" + hotel.Hotel.Id.ToString() + ".jpg");
+                                            }
+                                        <a href="#!">
+                                            <img class="img-fluid bsb-scale bsb-hover-scale-up" loading="lazy" src="@src" alt="Living">
+                                        </a>
+                                        <figcaption>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-eye text-white bsb-hover-fadeInLeft" viewBox="0 0 16 16">
+                                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                            </svg>
+                                            <h4 class="h6 text-white bsb-hover-fadeInRight mt-2">راه ارتباطی: </h4>
+                                        </figcaption>
+                                    </figure>
+                                    <div class="card-body m-0 p-0">
+                                        <div class="entry-header mb-3">
+                                            <h2 class="card-title entry-title h4 m-0">
+                                                <a class="link-dark text-decoration-none" href="#!">@hotel.Hotel.Name  </a>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer border-0 bg-transparent p-0 m-0">
+                                        <ul class="entry-meta list-unstyled d-flex align-items-center m-0">
+                                            <li>
+                                                <a class="fs-7 link-secondary text-decoration-none d-flex align-items-center" href="#!">
+                                                    <i class="fas fa-route"></i>
+                                                    @if (hotel.distance < 1)
+                                                    {
+                                                        double dis = hotel.distance * 1000;
+                                                        <span class="ms-2 fs-7">@dis فاصله:متر</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="ms-2 fs-7">@hotel.distance فاصله:کیلومتر</span>
+                                                    }
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <span class="px-3">&bull;</span>
+                                            </li>
+                                            <li>
+                                                <a class="link-secondary text-decoration-none d-flex align-items-center" href="#!">
+                                                    <i class="fas fa-phone"></i>
+                                                    <span class="ms-2 fs-7">@hotel.Hotel.address : شماره تماس</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    
+                    }
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <button id="load-more-hotel" class="btn bsb-btn-2xl btn-primary rounded-pill mt-5 mt-xl-10" data-expanded="false">نمایش بیشتر</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+
+
+
+    <section id="gallery">
+        <h2>گالری</h2>
+        <div class="container">
+            @if (Model.Pictures != null)
+            {
+                    @for (var i = 0; i < Model.Pictures.Count; i++)
+                    {
+                        var pic = Model.Pictures[i];
+                        string src = "~/uploads/" + pic.FilePath;
+                        var imgUrl = Url.Content(src);
+                        <div class="gallery-item">
+                            <img src="@imgUrl" class="gallery-img" />
+                            <div class="like-button"></div>
+                        </div>
+                        
                 }
 
-
-              </div>      
-               
-            <br><br>
-            <form asp-action="AddPicture" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="Id" value="@Model.sightseeing.Id" />
-                <div class="upload-section">
-                    <h3>آپلود عکس شما</h3>
-                    <label for="imageUpload">انتخاب فایل</label>
-                    <input name="Picture" type="file" id="imageUpload" >
-                    <div class="image-preview"></div>
-                    <button type="submit" id="uploadButton">آپلود</button>
+            }
+            else
+            {
+                <p>تصویری برای نمایش وجود ندارد!</p>
+            }
+           
+           
+        </div>
+        <br><br>
+        <form asp-action="AddPicture" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="Id" value="@Model.sightseeing.Id" />
+            <div class="upload-section">
+                <h3>آپلود عکس شما</h3>
+                <label for="imageUpload">انتخاب فایل</label>
+                <input name="Picture" type="file" id="imageUpload">
+                <div class="image-preview"></div>
+                <button type="submit" id="uploadButton">آپلود</button>
+            </div>
+        </form>
+       
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLablel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header d-flex align-items-center justify-content-between">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: auto;"></button>
+                        <h5 class="modal-title" id="exampleModalLabel"> ثبت نام کرده اید؟</h5>
+                    </div>
+                    <div class="modal-body">لطفا ابتدا ثبت نام کنید!🙂</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ثبت نام</button>
+                    </div>
                 </div>
-            </form>
-        </section>
+            </div>
+        </div>
+       
+    </section>
+
+
+        
         <section id="reviews">
             <h2>نظرات کاربران</h2>
             <!--<div>

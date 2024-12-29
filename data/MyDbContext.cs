@@ -25,6 +25,7 @@ namespace iranAttractions.data
 
         public DbSet<Hotel> Hotels { get; set; }
 
+        public DbSet<Resturant> Resturants {  get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().Property(u => u.Phonenumber).ValueGeneratedNever(); // Ensure PhoneNumber is not auto-generated }

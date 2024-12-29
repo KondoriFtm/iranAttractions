@@ -1,0 +1,11 @@
+﻿@model IEnumerable<iranAttractions.Models.City>
+
+     @foreach (var city in Model)
+    {
+        <a class="pic-link" asp-action="DisplayProvince" asp-controller="Province" asp-route-ItemId="@city.Id">
+
+            <button class="pic-button">@city.Name</button>
+
+        </a>
+    }
+ 

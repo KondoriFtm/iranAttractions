@@ -1,0 +1,147 @@
+﻿/* تنظیمات کلی */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* هدر */
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 60px;
+}
+
+/* جستجو */
+.search-section {
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto 40px; /* فاصله از بالای صفحه و گالری */
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+    .search-box input {
+        width: 80%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+        .search-box input:focus {
+            border-color: #faad95;
+        }
+
+    .search-box button {
+        padding: 10px 20px;
+        background-color: #faad95;
+        border: none;
+        border-radius: 25px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .search-box button:hover {
+            background-color: #e99a74;
+        }
+
+/* گالری */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+    margin-top: 20px; /* فاصله از فرم جستجو */
+}
+
+/* گالری */
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #faad95;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* متن را به پایین می‌آورد */
+    align-items: center; /* تراز کردن متن در مرکز */
+}
+
+    .gallery-item img {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+.pic-text {
+    margin-top: 10px;
+    color: #333;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+
+
+/* فوتر */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* برای صفحه‌های کوچکتر از 480px */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr 1fr;
+    }
+}

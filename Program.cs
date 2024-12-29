@@ -43,6 +43,10 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=DisplayBoxes}/{id?}");
+    pattern: "{controller=Home}/{action=privacy}/{id?}");
+
+app.MapControllerRoute(
+    name: "admin",
+    pattern: "{controller=admin}/{action=admin}/{id?}");
 
 app.Run();

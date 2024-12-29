@@ -1,5 +1,7 @@
-﻿@section mainPage {
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+﻿@model iranAttractions.ViewModels.MainViewModel
+
+@section mainPage {
+    <link rel="stylesheet" href="~/css/Site.css" asp-append-version="true" />
 }
 @{
     ViewData["Title"] = "DisplayBoxes";
@@ -7,13 +9,19 @@
 }
 
 @section header{
-    <header class="site-header">
+    
+
+        
+
         <div class="header-content">
             <h1 class="site-title">SAFAّRO&nbsp;</h1>
             <p class="site-tagline"> "هر مقصد یک داستان ، هر سفر یک خاطره"</p>
-            <input type="text" class="search-box" placeholder="جستجو">
+            <form asp-action="SearchResultCity" asp-controller="Home" method="post">
+                <input type="text" class="search-box" name="query" placeholder="جستجو">
+                <input type="submit" value="بزن بریم">
+            </form>
         </div>
-    </header>
+  
 }
 
 
@@ -22,65 +30,43 @@
     <article class="site-content">
 
         <!-- دیو استان‌ها -->
-        <div class="divprovince">
-            <h2 class="province">لیست استان‌ها</h2>
-            <div class="gallery-container1">
-                <a class="pic-link" href="shiraz.html">
-                    <img class="gallery" src="~/img/5.jpg" alt="takhte-jamshid">
-                    <button class="pic-button">شیراز</button>
+        <div class="divprovince  ">
+ 
+            @for (int i = 0; i < 3; i++)
+            {
+                var city = Model.Cities[i];
 
-                </a>
-                <p class="pic-text">36جاذبه</p>
+                <div class="gallery-container1  ">
+                    <a type="button" class="pic-link" asp-action="DisplayProvince" asp-controller="Province" asp-route-ItemId="@city.Id">
+                        <img class="gallery" src="~/img/City@(city.Id).jpg" alt="تصویری یافت نشد">
+                        <button class="pic-button">@city.Name</button>
+
+                    </a>
+                    <p class="pic-text">@city.AttractionCount جاذبه</p>
+                </div>
+            }
+
+            <div class="description-container"> <h3>ایران سرزمین ماندگار</h3>
+                <p><big> اگر هنوز مقصد شما برای تعطیلات مشخص نیست نگران نباشید لیستی از استان های ایران را اینجا میتئانید ببینید . با کلیک روی هر کدام جاذبه ای آن استانوهتل ها و رستئران های آن را شاهده میکنید و بهتر میتوانید تصمیم بگیرید به کدام شهر سفر کنید   <big></p>
             </div>
 
-            <div class="gallery-container1">
-                <a class="pic-link" href="isfahan.html">
-                    <img class="gallery" src="~/img/16.jpg" alt="isfahan">
-                    <button class="pic-button">اصفهان</button>
-
-                </a>
-                <p class="pic-text">70جاذبه</p>
-            </div>
-
-            <div class="gallery-container1">
-                <a class="pic-link" href="shiraz.html">
-                    <img class="gallery" src="~/img/88.jpg" alt="shiraz">
-                    <button class="pic-button">تهران</button>
-
-                </a>
-                <p class="pic-text">20جاذبه</p>
-            </div>
         </div>
-
         <!-- دیو جاذبه‌ها -->
         <div class="divattraction">
-            <h2 class="province">لیست جاذبه‌ها</h2>
-            <div class="gallery-container2">
-                <a class="pic-link" href="shiraz.html">
-                    <img class="gallery" src="~/img/6.jpg" alt="takhte-jamshid">
-                    <button class="pic-button">شیراز</button>
+            <div class="description-container"> <h3>جاذبه گرد</h3> <p>اگر مقصد شما بری سفر به یکی از استان های ایران جان مشخص شده ولی هنوز نمیدانید برای برنامه سفر خود به کدام جاذبه یا مکان تفریحی آن استان سفر کنید نگران نباسنبشاید <br/> ما برای هر جاذبه آن استان یک پک راهنمای کامل در اختیارتان قرار داده ایم تا همسفر شما در راه باشد .</p> </div>
 
-                </a>
-                <p class="pic-text">سعدیه</p>
-            </div>
+            @for (int i = 0; i < 3; i++)
+            {
+                var sightseeing = Model.sightseeings[i];
+                <div class="gallery-container2">
+                    <a type="button" class="pic-link" asp-action="DisplayInfoes" asp-controller="Attraction" asp-route-ItemId="@sightseeing.Id">
+                        <img class="gallery" src="~/img/Sight@(sightseeing.Id).jpg" alt="تصویری یافت نشد">
+                        <button class="pic-button">@sightseeing.City.Name</button>
 
-            <div class="gallery-container2">
-                <a class="pic-link" href="isfahan.html">
-                    <img class="gallery" src="~/img/19.jpg" alt="isfahan">
-                    <button class="pic-button">اصفهان</button>
-
-                </a>
-                <p class="pic-text">نقش جهان</p>
-            </div>
-
-            <div class="gallery-container2">
-                <a class="pic-link" href="isfahan.html">
-                    <img class="gallery" src="~/img/dew.jpg" alt="takhte-jamshid">
-                    <button class="pic-button">تهران</button>
-
-                </a>
-                <p class="pic-text">کاخ مسعودیه</p>
-            </div>
+                    </a>
+                    <p class="pic-text">@sightseeing.Name</p>
+                </div>
+            }
         </div>
 
     </article>

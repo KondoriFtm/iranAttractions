@@ -20,7 +20,6 @@ img {
 }
 
 button {
-    height: 10px;
     width: 24%;
     display: flex;
     justify-content: center;
@@ -38,8 +37,12 @@ button {
     border: 1px solid #f6efdf;
 }
 
+    button:hover {
+        background-color: #faad95;
+    }
+
 .blog-card {
-    position: absolute;
+    position: relative;
     height: 370px;
     width: 95%;
     max-width: 850px;
@@ -57,6 +60,8 @@ button {
     align-items: center;
     justify-content: center;
     padding: 0;
+    transition: 0.3s ease-in-out;
+    margin-bottom: 30px;
 }
 
 #imgTap:checked ~ .inner-part {
@@ -102,6 +107,9 @@ button {
     margin-left: 50px;
     opacity: 0;
     transition: 0.6s;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
 }
 
 #tap-1:checked ~ .inner-part .content-1,
@@ -160,7 +168,6 @@ button {
     align-items: center;
 }
 
-
 #imgTap:checked ~ .sliders {
     display: none;
 }
@@ -208,6 +215,7 @@ input {
 #imgTap:checked ~ .inner-part .content {
     display: none;
 }
+
 /* Responsive */
 @media screen and (max-width: 50rem) {
     .inner-part {
@@ -239,3 +247,5 @@ input {
         position: relative;
     }
 }
+
+
