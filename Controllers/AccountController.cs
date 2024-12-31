@@ -115,6 +115,7 @@ namespace iranAttractions.Controllers
                         new Claim(ClaimTypes.Name, newuser.UserName),
 
 
+
                     };
             return RedirectToAction("DisplayProvince", "Province");
         }
@@ -124,5 +125,12 @@ namespace iranAttractions.Controllers
             return View();
 
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Redirect("/Account/Login");
+        }
+         
     }
 }

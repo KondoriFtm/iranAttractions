@@ -10,43 +10,45 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 }
 
-
-<div class="main-slider">
-    <div class="main-slide active">
-        @{
-            string srces = "~/img/" + Model.sightseeing.parts[0].PicUrl;
-            var imgUrle = Url.Content(srces);
-        }
-        <img src="@imgUrle" alt="Image 1">
-        <div class="main-caption">
-            <h1>@Model.sightseeing.parts[0].Title</h1>
-            <p>  @Model.sightseeing.parts[0].Description   </p>
-        </div>
-    </div>
-    @for(int i=1;i<Model.sightseeing.parts.Count;i++)
-    {
-        string srce = "~/img/" + Model.sightseeing.parts[i].PicUrl;
-        var imgUrl = Url.Content(srce);
-        <div class="main-slide">
-            <img src="@imgUrl" alt="Image 2">
+<!-- the headre parts  -->
+@if (Model.sightseeing.parts.Count != 0 && Model.sightseeing.parts != null)
+{
+    <div class="main-slider">
+        <div class="main-slide active">
+            @{
+                string srces = "~/img/" + Model.sightseeing.parts[0].PicUrl;
+                var imgUrle = Url.Content(srces);
+            }
+            <img src="@imgUrle" alt="Image 1">
             <div class="main-caption">
-                <h1>@Model.sightseeing.parts[i].Title</h1>
-                <p> @Model.sightseeing.parts[i].Description</p>
+                <h1>@Model.sightseeing.parts[0].Title</h1>
+                <p>  @Model.sightseeing.parts[0].Description   </p>
             </div>
         </div>
-    }
-   
-  
-    <div class="navigation">
-        <button class="prev" onclick="prevSlide()">&#10094;</button>
-        <button class="next" onclick="nextSlide()">&#10095;</button>
+        @for (int i = 1; i < Model.sightseeing.parts.Count; i++)
+        {
+            string srce = "~/img/" + Model.sightseeing.parts[i].PicUrl;
+            var imgUrl = Url.Content(srce);
+            <div class="main-slide">
+                <img src="@imgUrl" alt="Image 2">
+                <div class="main-caption">
+                    <h1>@Model.sightseeing.parts[i].Title</h1>
+                    <p> @Model.sightseeing.parts[i].Description</p>
+                </div>
+            </div>
+        }
+
+
+        <div class="navigation">
+            <button class="prev" onclick="prevSlide()">&#10094;</button>
+            <button class="next" onclick="nextSlide()">&#10095;</button>
+        </div>
     </div>
-</div>
+}
+
 
 <div class="main">
-
-        
-
+ 
     <div class="navbar2 d-flex justify-content-center align-items-center">
         <div class="w-50 d-flex justify-content-center align-items-center">
             <a href="#restaurants">رستوران‌ها</a>
@@ -57,10 +59,7 @@
 
     </div>
 
-
-
-
-
+    <!-- the section of all resturants -->
     <section id="resturants">
         <section class="bsb-blog-5 py-3 py-md-5 py-xl-8">
             <div class="container">
@@ -152,6 +151,7 @@
 
 
 
+ <!-- the section of the list of hotels in that sightseeing that ere ordered by the distance -->
 
     <section id="hotels">
         <section class="bsb-blog-5 py-3 py-md-5 py-xl-8">
@@ -242,9 +242,11 @@
 
 
 
+    <!-- the section the list of pictures and uploading a new one -->
 
     <section id="gallery">
         <h2>گالری</h2>
+        <h5>اگر تجربه سفر به این مکان دیدنی را دارید عکس های خود را با ما به اشتراک بگذارید <br /> در صورت تایید توسط ادمین عکس شما در همین صفحه منتشر میشود</h5>
         <div class="container">
             @if (Model.Pictures != null)
             {
@@ -253,12 +255,6 @@
                         var pic = Model.Pictures[i];
                         string src = "~/uploads/" + pic.FilePath;
                         var imgUrl = Url.Content(src);
-
-                   
-
-                   
-                  
-                    
 
                     <div class="gallery-item" data-picture-id=@pic.Id> 
                         <img src="@imgUrl" class="gallery-img" /> 
@@ -275,7 +271,7 @@
             }
             else
             {
-                <p>تصویری برای نمایش وجود ندارد!</p>
+                <p>تصویری برای نمایش وجود ندارد ! شما اولین نفر باشید که عکس خود را ثبت می کنید</p>
             }
            
            
@@ -291,21 +287,26 @@
                 <button type="submit" id="uploadButton">آپلود</button>
             </div>
         </form>
-       
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLablel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header d-flex align-items-center justify-content-between">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: auto;"></button>
-                        <h5 class="modal-title" id="exampleModalLabel"> ثبت نام کرده اید؟</h5>
-                    </div>
-                    <div class="modal-body">لطفا ابتدا ثبت نام کنید!🙂</div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ثبت نام</button>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLablel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex align-items-center justify-content-between">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: auto;"></button>
+                            <h5 class="modal-title" id="exampleModalLabel"> ثبت نام کرده اید؟</h5>
+                        </div>
+                        <div class="modal-body">لطفا ابتدا ثبت نام کنید!🙂</div>
+                        <!--
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ثبت نام</button>
+                        </div>
+                        -->
                     </div>
                 </div>
             </div>
-        </div>
+        }
+        
        
     </section>
 
@@ -313,51 +314,58 @@
         
         <section id="reviews">
             <h2>نظرات کاربران</h2>
-            <!--<div>
-              <p>تصویری برای نمایش وجود ندارد!</p>
-            </div>-->
+           
             <div class="comment-slider">
                 <div class="slider-comments">
-                    @{
+                    @if(Model.Comments!=null)
+                    {
+                        
                         int comments_count = Model.Comments.Count;
                         int l = 0;
                         int label = comments_count / 3 + 1;
-                    }
-                    @for(int i=0; i<label;i++)
-                    {
-                        <div class="com-slide">
-                            <div class="comments">
-                                @for(int j=0;j<3;j++)
-                                {
-                                    @if(l<comments_count)
+                        
+                        @for(int i=0; i<label;i++)
+                        {
+                            <div class="com-slide">
+                                <div class="comments">
+                                    @for(int j=0;j<3;j++)
                                     {
-                                        <div class="comment-box">
-                                            <span class="comment-name">@Model.Comments[l].Users.UserName</span>
-                                            <div class="comment-text">
-                                                @Model.Comments[l].Description;
-                                            </div>
-                                            <img class="comment-image" src=@Model.Comments[l].picurl alt="">
+                                        @if(l<comments_count)
+                                        {
+                                            <div class="comment-box">
+                                                <span class="comment-name">@Model.Comments[l].Users.UserName</span>
+                                                <div class="comment-text">
+                                                    @Model.Comments[l].Description;
+                                                </div>
+                                                <img class="comment-image" src=@Model.Comments[l].picurl alt="">
                                             
-                                        </div>
-                                        l += 1;
-                                    }
+                                            </div>
+                                            l += 1;
+                                        }
                                    
-                                    else
-                                    {
-                                        break;
-                                    }
+                                        else
+                                        {
+                                            break;
+                                        }
 
-                                }   
-                            </div>
+                                    }   
+                                </div>
 
-                        </div>  
+                            </div>  
                     }
-                   
-                
-                </div>
+
+                }
+                else
+                {
+                    <div>
+                        <p>نظری برای نمایش وجود ندارد!</p>
+                    </div>
+                }
+            </div>
                 <button id="prevBtn">&#10094;</button>
                 <button id="nextBtn">&#10095;</button>
             </div>
+
             <section id="add-comment-section">
               <h3>ارسال نظر</h3>
                 <form id="form_submition" asp-action="AddComment" asp-controller="Attraction" method="post">
