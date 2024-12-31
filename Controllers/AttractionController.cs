@@ -20,6 +20,7 @@ namespace iranAttractions.Controllers
 
         }
 
+        [HttpGet]
         public IActionResult DisplayInfoes(int id)
         {
             var sightseeings =  _db.sightseeing

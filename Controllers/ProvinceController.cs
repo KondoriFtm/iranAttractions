@@ -1,20 +1,45 @@
-﻿using iranAttractions.Models;
+﻿using iranAttractions.data;
+using iranAttractions.Models;
+using iranAttractions.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace iranAttractions.Controllers
 {
     public class ProvinceController : Controller
     {
-        public IActionResult DisplayProvince()
+        private readonly MyDbContext _db;
+
+        public ProvinceController(MyDbContext db)
         {
-            return View();
+            _db = db;
         }
 
-        public IActionResult Search()
+        public IActionResult DisplayProvince(int ItemId)
         {
-            return RedirectToAction();
+            // دریافت اطلاعات استان همراه با جاذبه‌ها، هتل‌ها و رستوران‌ها
+            var province = _db.City
+                .Include(c => c.sightseeings)
+                .Include(c => c.hotels)
+                .Include(c=>c.resturants)
+                .FirstOrDefault(c => c.Id == ItemId);
+
+            if (province == null)
+            {
+                return NotFound(); // اگر استان پیدا نشود
+            }
+
+            // آماده‌سازی مدل برای ویو
+            var model = new ProvinceViewModel
+            {
+                ProvinceName = province.Name,
+                ProvinceDescription = province.Description,
+                Sightseeings = province.sightseeings.Where(s => s.CityId == province.Id).ToList() ,
+                City=province
+    
+            };
+
+            return View(province);
         }
-
-
     }
 }

@@ -13,5 +13,7 @@ namespace iranAttractions.ViewModels
        public List<ResturantDistancesViewModel> Res_Dis { get; set; }
 
         public Sightseeing sightseeing { get; set; }
+
+
     }
 }

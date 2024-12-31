@@ -13,6 +13,7 @@ namespace iranAttractions.Models
 
         public List<Sightseeing> sightseeings { get; set; }
         public List<Hotel> hotels { get; set; }
+        public List<Resturant> resturants { get; set; }
 
         public int AttractionCount { get { return sightseeings != null ? sightseeings.Count : 0; } }
 

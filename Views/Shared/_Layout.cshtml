@@ -10,8 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazir&display=swap" rel="stylesheet">
 
     @RenderSection("mainPage", required: false) 
-    @RenderSection("Styles", required: false)  
-    
+    @RenderSection("Styles", required: false)
+    @RenderSection("gallary", required: false)
+
     <style>
 
         
@@ -35,12 +36,13 @@
                 padding: 0;
                 margin-top: 10px;
                 display: flex;
+                margin-right: 50px;
             }
 
             .navbar li {
                 display: block;
-                margin-left: 20px;
-                padding: 15px 25px;
+                margin-left: 36px;
+               
             }
 
             .navbar a {
@@ -104,7 +106,7 @@
         <nav class="navbar">
 
             <ul>
-                <li><img src="img/33.jpg" alt="Logo" class="logo"></li>
+               <!-- <li><img src="img/33.jpg" alt="Logo" class="logo"></li> -->
              
                 <li class="dropdown">
                     <a href="#" class="dropbtn">استان ها</a>

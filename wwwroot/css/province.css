@@ -1,5 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap');
-
+﻿
 * {
     margin: 0;
     padding: 0;
@@ -7,245 +6,346 @@
 }
 
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    font-family: 'Fira Sans', sans-serif;
-    background-color: white;
+    font-family: 'Vazir', sans-serif; /* Persian-friendly font */
+    background-color: #ffe5d9; /* رنگ پس‌زمینه روشن */
+    color: #333;
+    line-height: 1.6;
 }
-
-img {
-    max-width: 100%;
-}
-
-button {
-    width: 24%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px; /* Adjust the height as needed */
-    padding: 15px;
-    border: none;
-    font-size: 14px;
-    text-transform: uppercase;
-    color: #fc5203;
-    font-weight: 600;
-    background-color: #fc5203;
-    cursor: pointer;
-    border-radius: 50px;
-    border: 1px solid #f6efdf;
-}
-
-    button:hover {
-        background-color: #faad95;
-    }
 
 .blog-card {
-    position: relative;
-    height: 370px;
-    width: 95%;
-    max-width: 850px;
-    margin: auto;
-    border-radius: 25px;
-    background: #faad95;
-    box-shadow: 0 10px 50px rgba(90, 107, 1, 0.3);
-}
-
-.inner-part {
-    position: absolute;
-    display: flex;
-    height: 360px;
-    width: 850px;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    transition: 0.3s ease-in-out;
-    margin-bottom: 30px;
-}
-
-#imgTap:checked ~ .inner-part {
-    padding: 0;
-    transition: 0.1s ease-in;
-}
-
-.inner-part .img {
-    height: 260px;
-    width: 260px;
-    flex-shrink: 0;
+    width: 70%;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 10px;
     overflow: hidden;
-    border-radius: 20px;
-}
-
-#imgTap:checked ~ .inner-part .img {
-    height: 370px;
-    width: 850px;
-    z-index: 99;
-    margin-top: 10px;
-    transition: 0.3s 0.2s ease-in;
-}
-
-.img img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    cursor: pointer;
-    opacity: 0;
-    transition: 0.6s;
-}
-
-#tap-1:checked ~ .inner-part .img-1,
-#tap-2:checked ~ .inner-part .img-2,
-#tap-3:checked ~ .inner-part .img-3 {
-    opacity: 1;
-    transition-delay: 0.2s;
-}
-
-.content {
-    padding: 0 20px 0 35px;
-    width: 530px;
-    margin-left: 50px;
-    opacity: 0;
-    transition: 0.6s;
-    padding: 10px;
-    background-color: white;
-    border-radius: 8px;
-}
-
-#tap-1:checked ~ .inner-part .content-1,
-#tap-2:checked ~ .inner-part .content-2,
-#tap-3:checked ~ .inner-part .content-3 {
-    opacity: 1;
-    margin-left: 0;
-    z-index: 100;
-    transition-delay: 0.3s;
-}
-
-.content .title {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     direction: rtl;
-    font-size: 30px;
-    font-weight: 700;
-    color: #2e2e2e;
-    margin: 20px 0;
-}
-
-.content .text {
-    direction: rtl;
-    color: #000;
-    font-size: 19px;
-    margin-bottom: 30px;
-    line-height: 1.5em;
-    text-align: justify;
-}
-
-.content button {
-    margin-right: 180px;
-    display: inline-flex;
-    padding: 15px;
-    border: none;
-    font-size: 14px;
-    text-transform: uppercase;
-    color: white;
-    font-weight: 600;
-    background-color: #fc5203;
-    cursor: pointer;
-    border-radius: 50px;
+    padding: 20px;
     border: 1px solid #fc5203;
 }
 
-    .content button:hover {
-        background-color: #faad95;
+.sliders {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.tap {
+    width: 15px;
+    height: 15px;
+    background-color: #faad95;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .tap:hover {
+        background-color: #fc5203;
     }
 
-.sliders {
+input[type="radio"] {
+    display: none;
+}
+
+.inner-part {
+    display: none;
+    padding: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-align:center;
+}
+
+    .inner-part img {
+        width: 94%;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        height:650px;
+    }
+
+.content {
+    text-align: right;
+}
+
+.title {
+    font-size: 24px;
+    color: #289fd2;
+    margin-bottom: 10px;
+}
+
+.text-container {
+    margin-bottom: 15px;
+}
+
+.text {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #fc5203;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    button:hover {
+        background-color: #289fd2;
+    }
+
+#tap-1:checked ~ .sliders ~ .inner-part.slide-1,
+#tap-2:checked ~ .sliders ~ .inner-part.slide-2,
+#tap-3:checked ~ .sliders ~ .inner-part.slide-3 {
+    display: block;
+}
+
+.bottom-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.section {
+    width: 48%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: right;
+    /* border: 1px solid #fc5203 ; */
+}
+
+h2 {
+    font-size: 20px;
+    color: #fc5203;
+    margin-bottom: 10px;
+}
+
+.section p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .bottom-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+}
+
+/* -------------------------- */
+/* --------بخش پایین-------- */
+/* -------------------------- */
+
+.bottom-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.section {
+    width: 48%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: right;
+}
+
+    .section h2 {
+        font-size: 20px;
+        color: #fc5203;
+        margin-bottom: 10px;
+    }
+
+    .section p {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.5;
+    }
+
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.slider-content {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider-item {
+    min-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+    .slider-item img {
+        width: 92%;
+        border-radius: 10px;
+        height:350px;
+        object-fit:cover;
+    }
+
+    .slider-item h3 {
+        font-size: 20px;
+        color: #289fd2;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .slider-item p {
+        font-size: 16px;
+        color: #666;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+
+.slider-controls {
     position: absolute;
-    bottom: 25px;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 12;
     display: flex;
+    justify-content: center;
+}
+
+.slider-control {
+    width: 15px;
+    height: 15px;
+    background-color: #faad95;
+    margin: 0 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.slider-item {
+    display: none;
+}
+
+#slider-1-1:checked ~ .slider-content #slider-item-1,
+#slider-1-2:checked ~ .slider-content #slider-item-2,
+#slider-1-3:checked ~ .slider-content #slider-item-3 {
+    display: block;
+}
+
+#slider-2-1:checked ~ .slider-content #slider-item-4,
+#slider-2-2:checked ~ .slider-content #slider-item-5,
+#slider-2-3:checked ~ .slider-content #slider-item-6 {
+    display: block;
+}
+
+.slider-controls label {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 5px;
+    background-color: #ddd;
+    padding: 10px;
+}
+
+    .slider-controls label:hover {
+        background-color: #fc5203;
+    }
+
+.slider-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+    .slider-container input[type="radio"] {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+
+.slider-controls {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 10;
+}
+
+.slider-control {
+    width: 15px;
+    height: 15px;
+    margin: 0 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .slider-control:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+input[type="radio"]:checked + .slider-controls label {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.slider-content {
+    padding-bottom: 50px;
     justify-content: center;
     align-items: center;
 }
 
-#imgTap:checked ~ .sliders {
+
+/* Common slide class */
+/* Hide all slides by default */
+.inner-part.slide {
     display: none;
 }
 
-.sliders .tap {
-    position: relative;
-    height: 10px;
-    width: 50px;
-    background: #ffe5d9;
-    border-radius: 5px;
-    display: inline-flex;
-    margin: 0 3px;
+/* Show the first slide initially */
+.tap-input:checked ~ .inner-part[data-slide="0"] {
+    display: block;
+}
+
+
+
+/* Hover effect using JavaScript */
+
+
+/* Styling for taps */
+.tap {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
     cursor: pointer;
 }
 
-    .sliders .tap:hover {
-        background: #ccc;
-    }
 
-    .sliders .tap::before {
-        position: absolute;
-        content: '';
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: -100%;
-        background-color: #fc5203;
-        border-radius: 10px;
-        transform: scaleX(0);
-        transition: transform 0.6s;
-        transform-origin: left;
-    }
 
-input {
-    display: none;
+/* Add more specific styling as needed */
+a {
+    text-decoration: none;
+    color: inherit;
 }
-
-#tap-1:checked ~ .sliders .tap-1::before,
-#tap-2:checked ~ .sliders .tap-2::before,
-#tap-3:checked ~ .sliders .tap-3::before {
-    transform: scaleX(1);
-    width: 100%;
-}
-
-#imgTap:checked ~ .inner-part .content {
-    display: none;
-}
-
-/* Responsive */
-@media screen and (max-width: 50rem) {
-    .inner-part {
-        flex-direction: column;
-    }
-
-    .blog-card {
-        height: 560px;
-    }
-
-    .sliders {
-        left: 50%;
-    }
-
-    .content {
-        margin-left: 0;
-        width: auto;
-        margin-top: 1rem;
-    }
-
-    .text {
-        text-align: right !important;
-    }
-
-    #imgTap:checked ~ .inner-part .img {
-        height: 560px;
-        width: 100%;
-        top: 95px;
-        position: relative;
-    }
-}
-
-

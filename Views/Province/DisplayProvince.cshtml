@@ -1,58 +1,171 @@
-﻿
-
+﻿@model City
 
 @section Styles {
     <link rel="stylesheet" href="~/css/province.css" />
-
 }
 
-<div class="container my-5">
-    <div class="blog-card row">
-        <div class="col-12">
-            <input type="radio" name="select" id="tap-1" checked />
-            <input type="radio" name="select" id="tap-2" />
-            <input type="radio" name="select" id="tap-3" />
-            <input type="checkbox" id="imgTap" />
-            <div class="sliders">
-                <label for="tap-1" class="tap tap-1"></label>
-                <label for="tap-2" class="tap tap-2"></label>
-                <label for="tap-3" class="tap tap-3"></label>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <title>استان اصفهان</title>
+    <link rel="stylesheet" href="~/css/province.css" />
+</head>
+<body>
+    <div class="blog-card">
+        <h2>مکان های دیدنی</h2>
+        @for (int i = 0; i < Model.sightseeings.Count; i++)
+        {
+            <input type="radio" name="select" id="tap-@i" class="tap-input" @(i == 0 ? "checked" : "") data-slide="@i" />
+        }
+        <div class="sliders">
+            @for (int i = 0; i < Model.sightseeings.Count; i++)
+            {
+                <label for="tap-@i" class="tap" data-tap="@i"></label>
+            }
+        </div>
+        @for (int i = 0; i < Model.sightseeings.Count; i++)
+        {
+            var slide = Model.sightseeings[i];
+            <div class="inner-part slide" data-slide="@i">
+                <div class="img">
+                    <img src="@Url.Content("~/img/sight" + slide.Id + ".jpg")" alt="" />
+
+                </div>
+                <div class="content">
+                    <h3 class="title">@slide.Name</h3>
+                    <div class="text-container">
+                        <p class="text">@slide.Description</p>
+                    </div>
+                    <button><a asp-action="DisplayInfoes" asp-controller="attraction" asp-route-Id=@slide.Id>بیشتر</a></button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="bottom-section">
+        <div class="section section-1">
+            <h2>رستوران ها</h2>
+            <div class="slider-container">
+                @for (int i = 0; i < Model.resturants.Count; i++)
+                {
+                    <input type="radio" name="slider-1" id="slider-1-@i" class="restaurant-input" @(i == 0 ? "checked" : "") data-slide="@i" />
+                }
+                <div class="slider-controls">
+                    @for (int i = 0; i < Model.resturants.Count; i++)
+                    {
+                        <label for="slider-1-@i" class="slider-control"></label>
+                    }
+                </div>
+                <div class="slider-content">
+                    @for (int i = 0; i < Model.resturants.Count; i++)
+                    {
+                        var restaurant = Model.resturants[i];
+                        <div class="slider-item restaurant-item" data-slide="@i">
+
+                            <img src="@Url.Content("~/img/Restaurants/" + restaurant.Id.ToString() + ".jpg")" alt="" />
+                            <h3>@restaurant.Name</h3>
+                            <p>آدرس: @restaurant.address</p>
+                            <p>تلفن: @restaurant.PhoneNumber</p>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
-        <!-- Slide 1 -->
-        <div class="inner-part col-md-4 col-sm-6">
-            <label for="imgTap" class="img">
-                <img src="~/img/naghshejahan.jfif" alt="" class="img-1" />
-            </label>
-            <div class="content content-1">
-                <h3 class="title">میدان نقش جهان</h3>
-                <p class="text">میدان نقش جهان یکی از تاریخی ترین و همچنین جذاب ترین مکان های گردشگری استان اصفهان است.</p>
-                <button class="btn btn-primary">بیشتر</button>
-            </div>
-        </div>
-        <!-- Slide 2 -->
-        <div class="inner-part col-md-4 col-sm-6">
-            <label for="imgTap" class="img">
-                <img src="~/img/alighapo.jpg" alt="" class="img-2 img-fluid" />
-            </label>
-            <div class="content content-2">
-                <h3 class="title">عمارت عالی قاپو</h3>
-                <p class="text">کاخ عالی قاپو در میدان نقش جهان اصفهان از زیباترین نمونه‌های معماری دوره صفویان به شمار می‌آید.</p>
-                <button class="btn btn-primary">بیشتر</button>
-            </div>
-        </div>
-        <!-- Slide 3 -->
-        <div class="inner-part col-md-4 col-sm-6">
-            <label for="imgTap" class="img">
-                <img src="~/img/siosepol.jpg" alt="" class="img-3 img-fluid" />
-            </label>
-            <div class="content content-3">
-                <h3 class="title">سی و سه پل</h3>
-                <p class="text">این پل در طول تاریخ با نام‌های مختلفی خوانده‌ شده است که از جمله آن‌ها می‌توان به پل شاه‌عباسی، پل الله‌وردی خان، پل جلفا، پل چهل چشمه و پل سی‌وسه چشمه اشاره کرد.</p>
-                <button class="btn btn-primary">بیشتر</button>
+
+        <div class="section section-2">
+            <h2>هتل ها</h2>
+            <div class="slider-container">
+                @for (int i = 0; i < Model.hotels.Count; i++)
+                {
+                    <input type="radio" name="slider-2" id="slider-2-@i" class="hotel-input" @(i == 0 ? "checked" : "") data-slide="@i" />
+                }
+                <div class="slider-controls">
+                    @for (int i = 0; i < Model.hotels.Count; i++)
+                    {
+                        <label for="slider-2-@i" class="slider-control"></label>
+                    }
+                </div>
+                <div class="slider-content">
+                    @for (int i = 0; i < Model.hotels.Count; i++)
+                    {
+                        var hotel = Model.hotels[i];
+                        <div class="slider-item hotel-item" data-slide="@i">
+                            <img src="@Url.Content("~/img/Hotels/" + hotel.Id.ToString() + ".jpg")" alt="" />
+                            <h3>@hotel.Name</h3>
+                            <p>آدرس: @hotel.address</p>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    <<script>
+        // JavaScript to handle dynamic showing of slides
+        document.querySelectorAll('.tap-input').forEach(input => {
+            input.addEventListener('change', function() {
+                let slideIndex = this.getAttribute('data-slide');
+                document.querySelectorAll('.inner-part').forEach(slide => {
+                    if (slide.getAttribute('data-slide') === slideIndex) {
+                        slide.style.display = 'block';
+                    } else {
+                        slide.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Trigger initial display for the checked input
+        document.querySelector('.tap-input:checked').dispatchEvent(new Event('change'));
+    </script>
+    
+    <script>
+        // JavaScript to handle dynamic showing of restaurant slides
+        document.querySelectorAll('.restaurant-input').forEach(input => {
+            input.addEventListener('change', function () {
+                let slideIndex = this.getAttribute('data-slide');
+                document.querySelectorAll('.slider-content .restaurant-item').forEach(slide => {
+                    slide.style.display = (slide.getAttribute('data-slide') === slideIndex) ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Trigger initial display for the checked restaurant input
+        document.querySelectorAll('.restaurant-input:checked').forEach(input => {
+            input.dispatchEvent(new Event('change'));
+        });
+    </script>
+
+    <script>
+        // JavaScript to handle dynamic showing of hotel slides
+        document.querySelectorAll('.hotel-input').forEach(input => {
+            input.addEventListener('change', function () {
+                let slideIndex = this.getAttribute('data-slide');
+                document.querySelectorAll('.slider-content .hotel-item').forEach(slide => {
+                    slide.style.display = (slide.getAttribute('data-slide') === slideIndex) ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Trigger initial display for the checked hotel input
+        document.querySelectorAll('.hotel-input:checked').forEach(input => {
+            input.dispatchEvent(new Event('change'));
+        });
+    </script>
+
+    
+ 
+</body>
+</html>
+
+
+
+
+
+    
 

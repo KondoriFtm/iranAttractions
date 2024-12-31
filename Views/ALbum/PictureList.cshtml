@@ -1,17 +1,11 @@
 ﻿@model IEnumerable<iranAttractions.ViewModels.PictureListViewModel>
 
-<!DOCTYPE html>
-<html lang="fa">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> گالری</title>
-    <link rel="stylesheet" href="~/css/Album.css">
-</head>
-<body>
-    <header>
+
         <h2>گالری</h2>
-    </header>
+  @section gallary{
+    <link rel="stylesheet" href="~/css/Album.css">
+
+  }
 
     <!-- فرم جستجو -->
     <section class="search-section">
@@ -41,5 +35,4 @@
             </div>
         }
     </div>
-</body>
-</html>
+
