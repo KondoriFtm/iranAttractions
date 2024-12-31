@@ -9,7 +9,6 @@ body {
 
 /* هدر */
 header {
-    background-color: #333;
     color: #fff;
     text-align: center;
     padding: 20px 0;
@@ -119,7 +118,7 @@ footer {
     padding: 10px;
     background-color: #333;
     color: #fff;
-    position: fixed;
+    /*position: fixed;*/
     width: 100%;
     bottom: 0;
 }

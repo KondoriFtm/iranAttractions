@@ -1,12 +1,11 @@
 ﻿@model IEnumerable<iranAttractions.ViewModels.PictureListViewModel>
 
 
-        <h2>گالری</h2>
   @section gallary{
     <link rel="stylesheet" href="~/css/Album.css">
 
   }
-
+  <div class="main">
     <!-- فرم جستجو -->
     <section class="search-section">
         <form method="get" action="/Album/PictureList">
@@ -35,4 +34,6 @@
             </div>
         }
     </div>
+
+</div>
 
