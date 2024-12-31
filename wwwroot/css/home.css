@@ -526,3 +526,8 @@ div img:hover {
     max-width: 600px;
     margin: 0 auto;
 }
+
+.p-Gray{
+    margin-top:-8px;
+    color:gray;
+}
