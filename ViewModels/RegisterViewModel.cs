@@ -9,8 +9,9 @@ namespace iranAttractions.ViewModels
 
 
 
-        [Required(ErrorMessage = "لطفا ایمیل خود وارد کنید  ")]
+        [Required(ErrorMessage = "لطفا شماره تماس خود وارد کنید  ")]
         [Display(Name = "شماره تماس ")]
+        [Phone]
         public string phonenumber { get; set; }
 
 

@@ -46,7 +46,7 @@ namespace iranAttractions.Controllers
                     {
                         new Claim(ClaimTypes.NameIdentifier, user.Phonenumber.ToString()),
                         new Claim(ClaimTypes.Name, user.UserName),
-
+                        new Claim(ClaimTypes.MobilePhone, user.Phonenumber)
 
                     };
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -60,7 +60,7 @@ namespace iranAttractions.Controllers
 
                 HttpContext.SignInAsync(principal, properties);
 
-                return RedirectToAction("DisplayProvince", "Province");
+                return RedirectToAction("Privacy", "Home");
             }
             else
             {
@@ -70,6 +70,7 @@ namespace iranAttractions.Controllers
 
 
         }
+
 
         public IActionResult Login()
         {
@@ -113,11 +114,20 @@ namespace iranAttractions.Controllers
                     {
                         new Claim(ClaimTypes.NameIdentifier, newuser.Phonenumber.ToString()),
                         new Claim(ClaimTypes.Name, newuser.UserName),
-
-
+                        new Claim(ClaimTypes.MobilePhone, newuser.Phonenumber)
 
                     };
-            return RedirectToAction("DisplayProvince", "Province");
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+
+            var properties = new AuthenticationProperties
+            {
+                IsPersistent =true
+            };
+
+            HttpContext.SignInAsync(principal, properties);
+
+            return RedirectToAction("privacy", "home");
         }
 
         public IActionResult Register()
