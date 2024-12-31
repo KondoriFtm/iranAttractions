@@ -328,6 +328,7 @@ div img:hover {
         align-items: center;
         height: auto;
         margin: 20px;
+        align-content: center;
     }
 
     .search-box {

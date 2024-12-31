@@ -48,14 +48,14 @@ namespace iranAttractions.Controllers
         [HttpPost]
         public IActionResult SearchResultCity(string query)
         {
-            var resultCity = _db.City.Where(e => e.Name == query)
-            .ToList();
+            var resultCity = _db.City.SingleOrDefault(e => e.Name == query)
+          ;
             var resultSightseeing = _db.sightseeing.Include(s=>s.City).Where(e => e.City.Name.Contains(query) || e.Name.Contains(query))
                 .ToList();
-            if (resultCity.Count > 0)
+            if (resultCity !=null)
             {
 
-                return RedirectToAction("DisplayProvince", "Province", new { queryResult = resultCity });
+                return RedirectToAction("DisplayProvince", "Province", new { ItemId = resultCity.Id });
 
             }
 
