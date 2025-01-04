@@ -4,20 +4,11 @@
     <link rel="stylesheet" href="~/css/province.css" />
 }
 
-@{
-    Layout = null;
-}
 
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="utf-8" />
-    <title>استان اصفهان</title>
-    <link rel="stylesheet" href="~/css/province.css" />
-</head>
-<body>
+
+<h2>مکان های دیدنی</h2>
+
     <div class="blog-card">
-        <h2>مکان های دیدنی</h2>
         @for (int i = 0; i < Model.sightseeings.Count; i++)
         {
             <input type="radio" name="select" id="tap-@i" class="tap-input" @(i == 0 ? "checked" : "") data-slide="@i" />
@@ -105,63 +96,6 @@
         </div>
     </div>
 
-    <<script>
-        // JavaScript to handle dynamic showing of slides
-        document.querySelectorAll('.tap-input').forEach(input => {
-            input.addEventListener('change', function() {
-                let slideIndex = this.getAttribute('data-slide');
-                document.querySelectorAll('.inner-part').forEach(slide => {
-                    if (slide.getAttribute('data-slide') === slideIndex) {
-                        slide.style.display = 'block';
-                    } else {
-                        slide.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Trigger initial display for the checked input
-        document.querySelector('.tap-input:checked').dispatchEvent(new Event('change'));
-    </script>
-    
-    <script>
-        // JavaScript to handle dynamic showing of restaurant slides
-        document.querySelectorAll('.restaurant-input').forEach(input => {
-            input.addEventListener('change', function () {
-                let slideIndex = this.getAttribute('data-slide');
-                document.querySelectorAll('.slider-content .restaurant-item').forEach(slide => {
-                    slide.style.display = (slide.getAttribute('data-slide') === slideIndex) ? 'block' : 'none';
-                });
-            });
-        });
-
-        // Trigger initial display for the checked restaurant input
-        document.querySelectorAll('.restaurant-input:checked').forEach(input => {
-            input.dispatchEvent(new Event('change'));
-        });
-    </script>
-
-    <script>
-        // JavaScript to handle dynamic showing of hotel slides
-        document.querySelectorAll('.hotel-input').forEach(input => {
-            input.addEventListener('change', function () {
-                let slideIndex = this.getAttribute('data-slide');
-                document.querySelectorAll('.slider-content .hotel-item').forEach(slide => {
-                    slide.style.display = (slide.getAttribute('data-slide') === slideIndex) ? 'block' : 'none';
-                });
-            });
-        });
-
-        // Trigger initial display for the checked hotel input
-        document.querySelectorAll('.hotel-input:checked').forEach(input => {
-            input.dispatchEvent(new Event('change'));
-        });
-    </script>
-
-    
- 
-</body>
-</html>
 
 
 

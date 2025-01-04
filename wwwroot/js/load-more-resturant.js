@@ -15,7 +15,7 @@ document.getElementById('load-more-resturant').addEventListener('click', functio
         this.setAttribute('data-expanded', 'false');
     } else {
         // در حالت "نمایش بیشتر"، کارت‌های جدید نمایش داده می‌شوند
-        const additionalHotels = document.querySelectorAll('..additional-resturants');
+        const additionalHotels = document.querySelectorAll('.additional-resturants');
         additionalHotels.forEach(hotel => hotel.style.display = 'block');
 
         // تغییر متن دکمه به "نمایش کمتر"

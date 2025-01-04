@@ -3,6 +3,7 @@ using iranAttractions.Models;
 using iranAttractions.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace iranAttractions.Controllers
@@ -65,15 +66,23 @@ namespace iranAttractions.Controllers
         }
         public IActionResult SearchResultSightseeing(string query)
         {
-            var resultSightseeng = _db.sightseeing.Include(s=>s.City).SingleOrDefault(e => e.City.Name.Contains(query) || e.Name.Contains(query))
-               ;
-            if (resultSightseeng!=null)
+            var resultSightseeng = _db.sightseeing.Include(s => s.City)
+                                                  .Where(e => e.City.Name.Contains(query) || e.Name.Contains(query))
+                                                  .ToList();
+
+            if (resultSightseeng.Any()) // Check if the list is not empty
             {
-                return RedirectToAction("DisplayInfoes", "Attraction", new { id = resultSightseeng.Id });
-
+                return View(resultSightseeng);
             }
-            return Content("نتیجه ای یافت نشد");
 
+            return Content("نتیجه ای یافت نشد");
+        }
+
+        public IActionResult ShowResult(string result)
+        {
+            // Retrieve the results from TempData
+            var sights = JsonConvert.DeserializeObject<List<Sightseeing>>(result);
+            return View(sights);
         }
 
         public IActionResult Search()

@@ -75,7 +75,7 @@
                      @for(int i =0 ; i<Model.Res_Dis.Count;i++)
                     {
                         var resturant = Model.Res_Dis[i];
-                        var additionalClass = i >= 3 ? ".additional-resturants" : "";
+                        var additionalClass = i >= 3 ? "additional-resturants" : "";
                         <div class="col-12 col-lg-4 @additionalClass">
                         <article>
                             <div class="card border-0 bg-transparent ">
@@ -176,8 +176,9 @@
                                     <figure class="card-img-top mb-4 overflow-hidden bsb-overlay-hover">
                                             @{
                                                 string src = Url.Content("~/img/Hotels/" + hotel.Hotel.Id.ToString() + ".jpg");
+                                                string CommunicationRel = "https://" + hotel.Hotel.CommunicationRel;
                                             }
-                                        <a href="#!">
+                                        <a href="@CommunicationRel">
                                             <img class="img-fluid bsb-scale bsb-hover-scale-up" loading="lazy" src="@src" alt="Living">
                                         </a>
                                         <figcaption>
@@ -247,26 +248,33 @@
     <section id="gallery">
         <h2>گالری</h2>
         <h5>اگر تجربه سفر به این مکان دیدنی را دارید عکس های خود را با ما به اشتراک بگذارید <br /> در صورت تایید توسط ادمین عکس شما در همین صفحه منتشر میشود</h5>
-        <div class="container">
+       
             @if (Model.Pictures != null)
             {
-                    @for (var i = 0; i < Model.Pictures.Count; i++)
+                for(int i =0 ;i<Model.Pictures.Count;i+=5)
+                {
+                <div class="container">
+                    @for (var j=i; j<i+5&& j<Model.Pictures.Count; j++)
                     {
-                        var pic = Model.Pictures[i];
-                        string src = "~/uploads/" + pic.FilePath;
-                        var imgUrl = Url.Content(src);
-
-                    <div class="gallery-item" data-picture-id=@pic.Id> 
-                        <img src="@imgUrl" class="gallery-img" /> 
-                        <div class="like-button" data-liked="false">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                            </svg>
-                            <span class="like-count">@pic.likecounts</span>
-                        </div> 
-                    </div>
                         
-                }
+                             var pic = Model.Pictures[j];
+                            string src = "~/uploads/" + pic.FilePath;
+                            var imgUrl = Url.Content(src); 
+
+                            <div class="gallery-item" data-picture-id=@pic.Id>
+                                <img src="@imgUrl" class="gallery-img" />
+                                <div class="like-button" data-liked="false">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg>
+                                    <span class="like-count">@pic.likecounts</span>
+                                </div>
+                            </div>
+                        
+                    }
+
+                </div>
+            }
 
             }
             else
@@ -275,7 +283,7 @@
             }
            
            
-        </div>
+        
         <br><br>
         <form asp-action="AddPicture" method="post" enctype="multipart/form-data">
             <input type="hidden" name="Id" value="@Model.sightseeing.Id" />

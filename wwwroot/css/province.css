@@ -13,15 +13,18 @@ body {
 }
 
 .blog-card {
-    width: 70%;
+    width: 65%;
     margin: 50px auto;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     direction: rtl;
     padding: 20px;
     border: 1px solid #fc5203;
+    position:relative;
+    top:30px;
+    height:435px;
 }
 
 .sliders {
@@ -49,7 +52,7 @@ input[type="radio"] {
 }
 
 .inner-part {
-    display: none;
+    display: flex;
     padding: 20px;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -57,28 +60,34 @@ input[type="radio"] {
 }
 
     .inner-part img {
-        width: 94%;
+        width: 100%;
         border-radius: 10px;
         margin-bottom: 15px;
-        height:650px;
+        height:330px;
     }
 
 .content {
     text-align: right;
+    margin-right:30px;
+    margin-top:40px;
+    height:40%;
+    width:55%
 }
 
 .title {
-    font-size: 24px;
+    font-size: 35px;
     color: #289fd2;
     margin-bottom: 10px;
+    font-weight:bold;
 }
 
 .text-container {
     margin-bottom: 15px;
+    height:130px;
 }
 
 .text {
-    font-size: 16px;
+    font-size: 18px;
     color: #666;
     line-height: 1.5;
 }
@@ -137,7 +146,7 @@ h2 {
         flex-direction: column;
         align-items: center;
     }
-
+    
     .section {
         width: 80%;
         margin-bottom: 20px;
@@ -317,15 +326,15 @@ input[type="radio"]:checked + .slider-controls label {
 
 /* Common slide class */
 /* Hide all slides by default */
-.inner-part.slide {
+/* 
+    .inner-part.slide {
     display: none;
 }
 
-/* Show the first slide initially */
+ Show the first slide initially 
 .tap-input:checked ~ .inner-part[data-slide="0"] {
     display: block;
-}
-
+} 
 
 
 /* Hover effect using JavaScript */
@@ -349,3 +358,11 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+.img{
+    display:inline;
+    width:39%;
+        
+}
+
+.slide{display:flex;}

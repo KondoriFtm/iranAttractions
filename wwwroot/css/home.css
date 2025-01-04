@@ -11,6 +11,7 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
+    font-size:18px;
 }
 
 .site-header {
@@ -187,22 +188,29 @@ div img:hover {
 .description-container {
     display: flex;
     flex-direction: column;
-    width: 20%; /* Adjusted width for four items in a row */
+    width: 23%; /* Adjusted width for four items in a row */
     background-color: #fff;
     padding: 10px;
     border-radius: 8px;
     text-align: center;
     box-sizing: border-box;
     margin: 10px 0; /* Adjusted margin for spacing */
-    margin-top: 55px;
-    margin-right:50px;
+   /* margin-top: 55px;
+    margin-right:50px;*/
     height:290px;
 }
 
 
 
-.des-con2{margin-left:50px;}
+.des-con2{
+    margin-left:60px;
+    margin-top:55px;
+}
 
+.des-con1 {
+    margin-right: 60px;
+    margin-top: 30px;
+}
 .gallery-container2 {
     background-color: #FFFFFF;
 }

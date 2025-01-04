@@ -1,0 +1,34 @@
+﻿@model List<iranAttractions.Models.Sightseeing>
+ 
+
+@section search{
+    <link rel="stylesheet" href="~/css/home.css"  />
+    <style>
+        .site-header{
+height:90px;
+        background-image:none;}
+    </style>
+}
+<h2 style="color: #fc5203; text-align: center;">
+    نتایج جستجو
+</h2>
+ <div class="divattraction">
+    
+
+    @foreach(var sight in Model)
+    {
+        
+        <div class="gallery-container2">
+            <a type="button" class="pic-link" asp-action="DisplayInfoes" asp-controller="Attraction" asp-route-Id="@sight.Id">
+                <div class="image-wrapper">
+                    <img class="gallery" src="~/img/Sight@(sight.Id).jpg" alt="تصویری یافت نشد">
+                    <div class="image-title ">@sight.City.Name / @sight.Name</div>
+
+                </div>
+
+
+            </a>
+        </div>
+    }
+</div>
+ 
