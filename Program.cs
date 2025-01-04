@@ -22,6 +22,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         option.LogoutPath = "/Account/Logout";
         option.ExpireTimeSpan = TimeSpan.FromDays(5);
     });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy => policy.RequireClaim("Role", "Admin"));
+    
+});
 var app = builder.Build();
 
 

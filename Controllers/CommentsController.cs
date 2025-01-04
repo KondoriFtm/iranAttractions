@@ -1,12 +1,14 @@
 ﻿using iranAttractions.data;
 using iranAttractions.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace iranAttractions.Controllers
 {
 
-    
+    [Authorize(policy: "Admin")]
+
     public class CommentsController : Controller
     {
         private readonly MyDbContext _db;

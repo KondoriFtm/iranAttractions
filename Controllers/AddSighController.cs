@@ -1,11 +1,13 @@
 ﻿using iranAttractions.data;
 using iranAttractions.Models;
 using iranAttractions.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace iranAttractions.Controllers
 {
+    [Authorize(policy: "Admin")]
     public class AddSighController : Controller
     {
         private readonly MyDbContext _db;

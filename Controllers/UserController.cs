@@ -1,9 +1,11 @@
 ﻿using iranAttractions.data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iranAttractions.Controllers
 {
-    
+    [Authorize(policy: "Admin")]
+
 
     public class UserController : Controller
     {

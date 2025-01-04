@@ -1,9 +1,12 @@
 ﻿using iranAttractions.data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace iranAttractions.Controllers
 {
+    [Authorize(policy: "Admin")]
+
 
     public class PicturesController : Controller
     {
