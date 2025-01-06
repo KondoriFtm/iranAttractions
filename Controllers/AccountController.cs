@@ -31,8 +31,9 @@ namespace iranAttractions.Controllers
 
                 return View();
             }
+
             var user = _dbContext.User.SingleOrDefault(u => u.Phonenumber == model.phonenumber);
-            if (user == null) //means no usr with such a UserID s available
+            if (user == null) //means no usr with such a UserID Is available
             {
 
                 ModelState.AddModelError("phonenumber", "شما قبلا ثبت نام نکرده اید");
@@ -92,10 +93,11 @@ namespace iranAttractions.Controllers
                 return View();
             }
 
+            
             var user = _dbContext.User.SingleOrDefault(u => u.Phonenumber == Register.phonenumber);
             if (user != null)
             {
-                ModelState.AddModelError("", "you have been registered! please login");
+                ModelState.AddModelError("", "شمت قبلا ثبت نام کرده اید لطفا وارد شوید ");
                 return View();
             }
             if (Register.password != Register.Repeatpassword)
@@ -105,6 +107,9 @@ namespace iranAttractions.Controllers
 
             }
 
+            //if there was not a user with phonenumber enterd by user 
+            //and the paasword is equal to repeatPasword 
+            //then a new user instance is made
             User newuser = new User
             {
                 UserName = Register.username,

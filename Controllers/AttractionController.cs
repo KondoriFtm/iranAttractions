@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-
+ 
 namespace iranAttractions.Controllers
 {
     public class AttractionController : Controller
@@ -23,11 +23,16 @@ namespace iranAttractions.Controllers
         [HttpGet]
         public IActionResult DisplayInfoes(int id)
         {
+            //find the sightseeing with the given Id
             var sightseeings =  _db.sightseeing
                                    .Include(s=>s.parts)
                                    .FirstOrDefault(s => s.Id == id);
+
+            //extract all hotels and resturants in the city that the sightseeing is located
             var hotels = _db.Hotels.Where(H=>H.cityId==sightseeings.CityId).ToList();
-            
+            var resturants = _db.Resturants.Where(H => H.cityId == sightseeings.CityId).ToList();
+
+            //add the found hotel information and their distances to HotelDistancesViewModel
             List<HotelDistancesViewModel> hotelDistances = new List<HotelDistancesViewModel>();
             foreach(var hotel in hotels )
             {
@@ -38,7 +43,7 @@ namespace iranAttractions.Controllers
 
             hotelDistances = hotelDistances.OrderBy(h => h.distance).ToList();
 
-            var resturants = _db.Resturants.Where(H => H.cityId == sightseeings.CityId).ToList();
+            //add the found resturant information and their distances to ResturantDistancesViewModel
 
             List<ResturantDistancesViewModel> ResturantDistances = new List<ResturantDistancesViewModel>();
             foreach (var resturant in resturants)
@@ -49,10 +54,16 @@ namespace iranAttractions.Controllers
             }
 
             ResturantDistances = ResturantDistances.OrderBy(h => h.distance).ToList();
+
+            //find all comments related to the desired sightseeing wich are confirmed(state=1)
             var comments = _db.Comment.Where(c=>c.SightseeingId == id&&c.State==1).Include(c=>c.Users).ToList();
             if (!comments.Any()) { comments = null; }
+
+            //find all pictures related to the desired sightseeing wich are confirmed(state=1)
             var pictures = _db.Pictures.Where(p=>p.SightseeingId==id && p.state==1).ToList();
             if (!pictures.Any()) { pictures = null; }
+
+
             SightseeingViewModel model = new SightseeingViewModel()
             {
                 Comments = comments,
@@ -74,10 +85,6 @@ namespace iranAttractions.Controllers
 
         [HttpPost]
         [Authorize]
-        //it most done with admin
-        //so it must be placed in admin controller
-        //and add a Role Admin To it
-
         public IActionResult AddPicture(int Id, IFormFile Picture)
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
@@ -133,7 +140,7 @@ namespace iranAttractions.Controllers
             {
                 var com = new Comment
                 {
-                    Date = DateTime.Now,
+                    Date = DateTime.Now,              
                     State = 0,
                     SightseeingId = SightseeingId,
                     Description = Description,

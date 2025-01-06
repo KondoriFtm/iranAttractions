@@ -1,4 +1,5 @@
 ﻿@model List<iranAttractions.Models.Comment>
+@using iranAttractions.Extensions
 
 @{
     Layout = "_Layout1";
@@ -30,9 +31,13 @@
         <tbody>
             @foreach (var item in Model)
             {
+                
+                string shamsiDate = item.Date.HasValue ? item.Date.Value.ToShamsi() : "N/A"; 
+ 
+
                 <tr>
                     <td>@item.Users.UserName</td>
-                    <td>@item.Date</td>
+                    <td>@shamsiDate</td>
                     <td>@item.Sightseeings.City.Name</td>
                     <td>@item.Sightseeings.Name</td>
                     <td>@item.Description</td>

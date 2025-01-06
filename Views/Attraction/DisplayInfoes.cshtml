@@ -81,8 +81,12 @@
                             <div class="card border-0 bg-transparent ">
 
                                 <figure class="card-img-top mb-4 overflow-hidden bsb-overlay-hover">
-                                    <a href="#!">
-                                        <img class="img-fluid bsb-scale bsb-hover-scale-up" loading="lazy" src="/img/alighapo.jpg" alt="Living">
+                                        @{
+                                            string src = Url.Content("~/img/Restaurants/" + resturant.resturant.Id.ToString() + ".jpg");
+                                            string CommunicationRel = "https://" + resturant.resturant.CommunicationRel;
+                                        }
+                                    <a href="@CommunicationRel">
+                                        <img class="img-fluid bsb-scale bsb-hover-scale-up" loading="lazy" src="@src" alt="Living">
                                     </a>
                                     <figcaption>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-eye text-white bsb-hover-fadeInLeft" viewBox="0 0 16 16">

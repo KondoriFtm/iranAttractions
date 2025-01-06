@@ -15,8 +15,13 @@ namespace iranAttractions.Controllers
         {
             _db = context;
         }
+
+        //an action method for dispaying the adding sightseeing page
         public IActionResult displayAdd()
         {
+
+            //for that the selection dropdown be filled when page comes up
+            //we need to fill it's value via a selectionItem List
             AddSightViewModel sight = new AddSightViewModel()
             {
                 CityLists = new List<SelectListItem> {
@@ -31,7 +36,9 @@ namespace iranAttractions.Controllers
         [HttpPost]
         public IActionResult AddSight(AddSightViewModel sight)
         {
-           var city =  _db.City.SingleOrDefault(c => c.Id == sight.CityId);
+            //after submiting the form a model of AddSightViewModel is sent to this action
+
+            var city =  _db.City.SingleOrDefault(c => c.Id == sight.CityId);
             Sightseeing newSight = new Sightseeing()
             {
                 Name = sight.Name,

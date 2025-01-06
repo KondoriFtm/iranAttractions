@@ -20,7 +20,7 @@ namespace iranAttractions.Controllers
         public IActionResult DisplayComments()
         {
             var comment = _db.Comment.Where(c => c.State == 0).Include(s => s.Sightseeings).ThenInclude(c => c.City).Include(u=>u.Users).ToList();
-
+             
 
             return View(comment);
         }
