@@ -40,13 +40,14 @@ namespace iranAttractions.Controllers
                 return View(model);
 
             }
+
+            //the user has been registered so can login
             if (user.password == model.password)
             {
-                //the user has been registered so can login
+                //save the user informations in cookies
                 var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.NameIdentifier, user.Phonenumber.ToString()),
-                        new Claim(ClaimTypes.Name, user.UserName),
                         new Claim(ClaimTypes.MobilePhone, user.Phonenumber),
                                                 new Claim("Role", user.Role),
 
@@ -93,11 +94,13 @@ namespace iranAttractions.Controllers
                 return View();
             }
 
-            
+            //see if a user with the entered phonenumber is available in database
             var user = _dbContext.User.SingleOrDefault(u => u.Phonenumber == Register.phonenumber);
-            if (user != null)
+
+            
+            if (user != null) 
             {
-                ModelState.AddModelError("", "شمت قبلا ثبت نام کرده اید لطفا وارد شوید ");
+                ModelState.AddModelError("", "شما قبلا ثبت نام کرده اید لطفا وارد شوید ");
                 return View();
             }
             if (Register.password != Register.Repeatpassword)
@@ -121,12 +124,12 @@ namespace iranAttractions.Controllers
             _dbContext.User.Add(newuser);
             _dbContext.SaveChanges();
 
+            //save the user informations in cookies
             var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.NameIdentifier, newuser.Phonenumber.ToString()),
-                        new Claim(ClaimTypes.Name, newuser.UserName),
                         new Claim(ClaimTypes.MobilePhone, newuser.Phonenumber),
-                                                new Claim("Role", user.Role),
+                        new Claim(ClaimTypes.Role, newuser.Role),
 
 
                     };

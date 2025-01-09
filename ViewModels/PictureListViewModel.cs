@@ -3,6 +3,8 @@
     public class PictureListViewModel
     {
         public int PictureId { get; set; }
+        public int AttractionId { get; set; }
+
         public string FilePath { get; set; }
         public string SightseeingName { get; set; }
         public string ProvinceName { get; set; }

@@ -1,10 +1,15 @@
+using iranAttractions.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Register AttractionService as a scoped service
+builder.Services.AddScoped<AttractionService>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<iranAttractions.data.MyDbContext>(options =>
 {
     options.UseSqlServer(connectionString: "Data Source=.;" +

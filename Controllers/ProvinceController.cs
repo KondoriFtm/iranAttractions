@@ -29,15 +29,7 @@ namespace iranAttractions.Controllers
                 return NotFound(); // اگر استان پیدا نشود
             }
 
-            // آماده‌سازی مدل برای ویو
-            var model = new ProvinceViewModel
-            {
-                ProvinceName = province.Name,
-                ProvinceDescription = province.Description,
-                Sightseeings = province.sightseeings.Where(s => s.CityId == province.Id).ToList() ,
-                City=province
-    
-            };
+           
 
             return View(province);
         }

@@ -12,23 +12,30 @@ height:90px;
 <h2 style="color: #fc5203; text-align: center;">
     نتایج جستجو
 </h2>
- <div class="divattraction">
-    
-
-    @foreach(var sight in Model)
-    {
+    <div class="divattraction">
         
-        <div class="gallery-container2">
-            <a type="button" class="pic-link" asp-action="DisplayInfoes" asp-controller="Attraction" asp-route-Id="@sight.Id">
-                <div class="image-wrapper">
-                    <img class="gallery" src="~/img/Sight@(sight.Id).jpg" alt="تصویری یافت نشد">
-                    <div class="image-title ">@sight.City.Name / @sight.Name</div>
+        @if (ViewBag.searchresult != null)
+        {
+            <h3> @ViewBag.searchresult </h3>
+        }
+        else
+        {
+            foreach (var sight in Model)
+            {
+            <div class="gallery-container2">
+            
+                    <a type="button" class="pic-link" asp-action="DisplayInfoes" asp-controller="Attraction" asp-route-Id="@sight.Id">
+                        <div class="image-wrapper">
+                            <img class="gallery" src="~/img/Sight@(sight.Id).jpg" alt="تصویری یافت نشد">
+                            <div class="image-title ">@sight.City.Name / @sight.Name</div>
 
-                </div>
+                        </div>
 
 
-            </a>
-        </div>
-    }
+                    </a>
+            </div>
+            }
+        }
+       
 </div>
  

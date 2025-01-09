@@ -8,6 +8,7 @@ using System.Diagnostics;
 
 namespace iranAttractions.Controllers
 {
+    //controller for the main page
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -47,13 +48,17 @@ namespace iranAttractions.Controllers
             return View(mainviewModel);
         }
         [HttpPost]
+
+        //when the user searches the query is sent for this action first
+        //it will search for query through the city names
         public IActionResult SearchResultCity(string query)
         {
             var resultCity = _db.City.SingleOrDefault(e => e.Name == query)
           ;
             var resultSightseeing = _db.sightseeing.Include(s=>s.City).Where(e => e.City.Name.Contains(query) || e.Name.Contains(query))
                 .ToList();
-            if (resultCity !=null)
+            if (resultCity !=null) //if no city was available with this name 
+                                    // try to serach through the sightseeings name
             {
 
                 return RedirectToAction("DisplayProvince", "Province", new { ItemId = resultCity.Id });
@@ -64,6 +69,9 @@ namespace iranAttractions.Controllers
 
 
         }
+
+        //search the query through the sightseeings name
+
         public IActionResult SearchResultSightseeing(string query)
         {
             var resultSightseeng = _db.sightseeing.Include(s => s.City)
@@ -74,27 +82,20 @@ namespace iranAttractions.Controllers
             {
                 return View(resultSightseeng);
             }
-
+            else
+            {
+                ViewBag.searchresult = "نتیجه ای یافت نشد";
+                return View(resultSightseeng);
+            }
             return Content("نتیجه ای یافت نشد");
         }
 
-        public IActionResult ShowResult(string result)
-        {
-            // Retrieve the results from TempData
-            var sights = JsonConvert.DeserializeObject<List<Sightseeing>>(result);
-            return View(sights);
-        }
+       
 
-        public IActionResult Search()
-        {
-            return View();
-        }
+       
 
 
-        public IActionResult Login()
-        {
-            return View();
-        }
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

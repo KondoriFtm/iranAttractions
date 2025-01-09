@@ -11,7 +11,9 @@ namespace iranAttractions.ViewModels
 
         [Required(ErrorMessage = "لطفا شماره تماس خود وارد کنید  ")]
         [Display(Name = "شماره تماس ")]
-        [Phone]
+        [Phone(ErrorMessage ="شماره تماس وارد شده معتبر نمی باشد")]
+        [StringLength(maximumLength:11, MinimumLength = 11, ErrorMessage = "شماره تماس باید 11 رقمی باشد")]
+
         public string phonenumber { get; set; }
 
 

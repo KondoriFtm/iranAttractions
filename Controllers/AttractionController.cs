@@ -13,11 +13,12 @@ namespace iranAttractions.Controllers
     {
         private readonly MyDbContext _db;
         private readonly IWebHostEnvironment _hostingEnvironment;
-        public AttractionController(MyDbContext context, IWebHostEnvironment hostingEnvironment)
+        private readonly AttractionService _attractionService;
+        public AttractionController(MyDbContext context, IWebHostEnvironment hostingEnvironment, AttractionService attractionService)
         {
             _hostingEnvironment = hostingEnvironment;
             _db = context;
-
+            _attractionService = attractionService;
         }
 
         [HttpGet]
@@ -32,28 +33,9 @@ namespace iranAttractions.Controllers
             var hotels = _db.Hotels.Where(H=>H.cityId==sightseeings.CityId).ToList();
             var resturants = _db.Resturants.Where(H => H.cityId == sightseeings.CityId).ToList();
 
-            //add the found hotel information and their distances to HotelDistancesViewModel
-            List<HotelDistancesViewModel> hotelDistances = new List<HotelDistancesViewModel>();
-            foreach(var hotel in hotels )
-            {
-                double dis = DistanceCalculator.CalculateDistance(sightseeings.lat, sightseeings.lon, hotel.lat, hotel.lon);
-                dis =  Math.Round(dis, 5);
-                hotelDistances.Add(new HotelDistancesViewModel() { distance = dis,Hotel=hotel });
-            }
 
-            hotelDistances = hotelDistances.OrderBy(h => h.distance).ToList();
-
-            //add the found resturant information and their distances to ResturantDistancesViewModel
-
-            List<ResturantDistancesViewModel> ResturantDistances = new List<ResturantDistancesViewModel>();
-            foreach (var resturant in resturants)
-            {
-                double dis = DistanceCalculator.CalculateDistance(sightseeings.lat, sightseeings.lon, resturant.lat, resturant.lon);
-                dis = Math.Round(dis, 5);
-                ResturantDistances.Add(new ResturantDistancesViewModel() { distance = dis, resturant = resturant });
-            }
-
-            ResturantDistances = ResturantDistances.OrderBy(h => h.distance).ToList();
+            var hotelDistances = GetHotelDistances(sightseeings);
+            var restaurantDistances = GetRestaurantDistances(sightseeings);
 
             //find all comments related to the desired sightseeing wich are confirmed(state=1)
             var comments = _db.Comment.Where(c=>c.SightseeingId == id&&c.State==1).Include(c=>c.Users).ToList();
@@ -70,7 +52,7 @@ namespace iranAttractions.Controllers
                 Pictures= pictures,
                 sightseeing=sightseeings,
                 Hot_Dis = hotelDistances,
-                Res_Dis = ResturantDistances
+                Res_Dis = restaurantDistances
             };
            
 
@@ -83,18 +65,42 @@ namespace iranAttractions.Controllers
             //if (sightseeing == null) { return NotFound(); }
         }
 
+        //method to get the distance between the all hotels
+        //in the the sightseeing city and the sightseeing
+        private List<HotelDistancesViewModel> GetHotelDistances(Sightseeing sightseeing)
+        { 
+            var hotels = _db.Hotels.Where(h => h.cityId == sightseeing.CityId).ToList();
+            return _attractionService.CalculateHotelDistances(sightseeing, hotels); 
+        }
+
+        //method to get the distance between the all resturants
+        //in the the sightseeing city and the sightseeing
+        private List<ResturantDistancesViewModel> GetRestaurantDistances(Sightseeing sightseeing) 
+        { 
+            var restaurants = _db.Resturants.Where(r => r.cityId == sightseeing.CityId).ToList();
+            return _attractionService.CalculateRestaurantDistances(sightseeing, restaurants);
+        }
+
         [HttpPost]
         [Authorize]
+
+        //method for save the user upluaded picture to database
         public IActionResult AddPicture(int Id, IFormFile Picture)
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
 
-           
+                
                 if (Picture != null && Picture.Length > 0)
                 {
+
+                    //extract the name of the uploaded picture
                     var fileName = Path.GetFileNameWithoutExtension(Picture.FileName);
                     var extension = Path.GetExtension(Picture.FileName);
+
+                    //tryies to create a unique name using the picture name
                     var uniqueFileName = $"{fileName}_{System.Guid.NewGuid()}{extension}";
+
+                    //and create the path for it in uploads folder
                     var path = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", uniqueFileName);
                     if (!Directory.Exists(Path.Combine(_hostingEnvironment.WebRootPath, "uploads")))
                     {
@@ -102,6 +108,8 @@ namespace iranAttractions.Controllers
                     }
                     using (var stream = new FileStream(path, FileMode.Create)) {Picture.CopyTo(stream); }
 
+                    //create a new instance of Picture 
+                    //and save it to database
                     Picture pic = new Picture()
                     {
                         FilePath = uniqueFileName,
@@ -127,9 +135,14 @@ namespace iranAttractions.Controllers
 
         [HttpPost]
         [Authorize]
+        //method for save the user upluaded comment to database
         public IActionResult AddComment(int SightseeingId, string Description, string UserName ,string picurl)
         {
+            //find the userId of the logined user using the 
+            //informations saved in the cookies
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
+
+            //whitch sightseeing to add the comment for it
             var sightseeing = _db.sightseeing.Include(s => s.Comments).ThenInclude(c => c.Users).FirstOrDefault(s => s.Id == SightseeingId);
             var user = _db.User.FirstOrDefault(u => u.Phonenumber == userId);
             if (user == null)
@@ -138,6 +151,8 @@ namespace iranAttractions.Controllers
             }
             else
             {
+                //create a new instance of Comment 
+                //and save it to database
                 var com = new Comment
                 {
                     Date = DateTime.Now,              

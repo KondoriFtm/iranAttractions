@@ -21,7 +21,9 @@
         @foreach (var picture in Model)
         {
              string src = Url.Content("~/uploads/" +picture.FilePath );
+
             <div class="gallery-item">
+                <a style="text-decoration:none" asp-controller="Attraction" asp-action="DisplayInfoes" asp-route-id="@picture.AttractionId">
                 <img src="@src" alt="عکس" class="gallery-image" />
                 <div class="pic-text">
                     <strong>
@@ -31,6 +33,7 @@
                         @picture.ProvinceName
                     </strong>
                 </div>
+                </a>
             </div>
         }
     </div>

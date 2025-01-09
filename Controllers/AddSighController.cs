@@ -39,6 +39,9 @@ namespace iranAttractions.Controllers
             //after submiting the form a model of AddSightViewModel is sent to this action
 
             var city =  _db.City.SingleOrDefault(c => c.Id == sight.CityId);
+
+            //a new instance of sightseeing is created 
+            //and them saved to database
             Sightseeing newSight = new Sightseeing()
             {
                 Name = sight.Name,
